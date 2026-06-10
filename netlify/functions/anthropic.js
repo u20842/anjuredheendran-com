@@ -40,6 +40,14 @@
 
     const data = await response.json();
 
+    if (data.error) {
+      return {
+        statusCode: 200,
+        headers: { 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' },
+        body: JSON.stringify({ debug_error: data.error, full_response: data })
+      };
+    }
+
     return {
       statusCode: 200,
       headers: {
