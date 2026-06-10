@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Body Map™ — ICU-1111 · Anju Redheendran</title>
+<meta name="description" content="The Body Map™ by Anju Redheendran — a personal assessment that translates what your body has been trying to say.">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --navy:#0a1628;
+  --navy-mid:#0d1e38;
+  --teal:#00c8b4;
+  --teal-soft:rgba(0,200,180,0.1);
+  --gold:#c9a84c;
+  --gold-soft:rgba(201,168,76,0.1);
+  --white:#ffffff;
+  --text:rgba(255,255,255,0.85);
+  --text-mid:rgba(255,255,255,0.6);
+  --text-soft:rgba(255,255,255,0.35);
+  --border:rgba(255,255,255,0.08);
+  --border-gold:rgba(201,168,76,0.2);
+  --font-display:'Cormorant Garamond',serif;
+  --font-body:'Montserrat',sans-serif;
+  --radius:3px;
+  --transition:0.25s ease;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--text);font-family:var(--font-body);font-weight:300;line-height:1.7;min-height:100vh;}
+
+/* PROGRESS BAR */
+.progress-bar{position:fixed;top:0;left:0;right:0;z-index:100;height:3px;background:rgba(255,255,255,0.08);}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--gold));transition:width 0.5s ease;}
+
+/* NAV */
+.nav{position:fixed;top:3px;left:0;right:0;z-index:99;background:rgba(10,22,40,0.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;}
+.nav-logo{font-family:var(--font-display);font-size:0.95rem;font-style:italic;color:var(--white);text-decoration:none;}
+.nav-stage{font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-soft);}
+
+/* LAYOUT */
+.container{max-width:720px;margin:0 auto;padding:0 2rem;}
+.screen{display:none;min-height:100vh;padding:100px 0 60px;}
+.screen.active{display:block;}
+
+/* STAGE INDICATOR */
+.stage-dots{display:flex;justify-content:center;gap:0.6rem;margin-bottom:3rem;}
+.stage-dot{width:8px;height:8px;border-radius:50%;background:var(--border);border:1px solid rgba(255,255,255,0.15);transition:all 0.3s;}
+.stage-dot.active{background:var(--teal);border-color:var(--teal);}
+.stage-dot.done{background:var(--gold);border-color:var(--gold);}
+
+/* HEADINGS */
+.eyebrow{font-size:0.6rem;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--teal);display:block;margin-bottom:0.75rem;}
+.screen-title{font-family:var(--font-display);font-size:clamp(2rem,4.5vw,3.2rem);font-weight:300;line-height:1.15;color:var(--white);margin-bottom:1.25rem;}
+.screen-title em{font-style:italic;color:var(--teal);}
+.screen-sub{font-size:0.88rem;color:var(--text-mid);line-height:1.9;margin-bottom:2.5rem;max-width:580px;}
+
+/* DISCLAIMER */
+.disclaimer{background:rgba(201,168,76,0.06);border:1px solid var(--border-gold);border-radius:4px;padding:1.5rem;margin-bottom:2rem;font-size:0.78rem;color:var(--text-mid);line-height:1.8;}
+.disclaimer strong{color:var(--gold);font-weight:600;}
+.disclaimer a{color:var(--teal);text-decoration:none;}
+
+/* FORM FIELDS */
+.field-group{margin-bottom:1.75rem;}
+.field-label{font-size:0.7rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-mid);display:block;margin-bottom:0.6rem;}
+.field-input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:var(--radius);padding:0.85rem 1rem;font-family:var(--font-body);font-size:0.88rem;font-weight:300;color:var(--white);outline:none;transition:border-color var(--transition);}
+.field-input:focus{border-color:var(--teal);}
+.field-input::placeholder{color:var(--text-soft);}
+
+/* QUESTION CARDS */
+.question-block{margin-bottom:2rem;}
+.question-text{font-size:0.92rem;color:var(--text);line-height:1.8;margin-bottom:1rem;font-weight:400;}
+.question-note{font-size:0.75rem;color:var(--text-soft);font-style:italic;margin-bottom:1rem;display:block;}
+
+/* CHECKBOX GRID */
+.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;}
+.check-item{display:flex;align-items:center;gap:0.75rem;padding:0.7rem 1rem;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:all var(--transition);font-size:0.8rem;color:var(--text-mid);}
+.check-item:hover{border-color:rgba(0,200,180,0.3);background:var(--teal-soft);}
+.check-item.selected{border-color:var(--teal);background:var(--teal-soft);color:var(--white);}
+.check-item.prefer-not{border-color:var(--border-gold);color:var(--text-soft);}
+.check-item.prefer-not.selected{border-color:var(--gold);background:var(--gold-soft);color:var(--text-mid);}
+.check-box{width:16px;height:16px;border:1.5px solid currentColor;border-radius:2px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;}
+
+/* SCALE */
+.scale-row{display:flex;align-items:center;gap:0.75rem;margin-top:0.75rem;}
+.scale-label{font-size:0.72rem;color:var(--text-soft);white-space:nowrap;}
+.scale-input{flex:1;-webkit-appearance:none;height:3px;background:var(--border);border-radius:2px;outline:none;cursor:pointer;}
+.scale-input::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--teal);cursor:pointer;border:2px solid var(--navy);}
+.scale-value{font-size:0.8rem;font-weight:600;color:var(--teal);min-width:20px;text-align:center;}
+
+/* SECTION DIVIDER */
+.section-divider{margin:2.5rem 0;border:none;border-top:1px solid var(--border);}
+.section-heading{font-size:0.65rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border-gold);}
+
+/* BUTTONS */
+.btn-primary{display:inline-flex;align-items:center;gap:0.5rem;padding:0.9rem 2rem;background:var(--teal);color:var(--navy);font-family:var(--font-body);font-size:0.65rem;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;border:none;border-radius:var(--radius);cursor:pointer;transition:all var(--transition);}
+.btn-primary:hover{background:#00e0ca;transform:translateY(-1px);}
+.btn-primary:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+.btn-secondary{display:inline-flex;align-items:center;gap:0.5rem;padding:0.9rem 2rem;background:transparent;color:var(--text-mid);font-family:var(--font-body);font-size:0.65rem;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:all var(--transition);}
+.btn-secondary:hover{border-color:rgba(255,255,255,0.3);color:var(--white);}
+.btn-row{display:flex;gap:1rem;align-items:center;margin-top:2.5rem;flex-wrap:wrap;}
+
+/* LOADING */
+.loading-screen{display:none;min-height:100vh;align-items:center;justify-content:center;flex-direction:column;gap:2rem;padding:2rem;}
+.loading-screen.active{display:flex;}
+.loading-pulse{width:60px;height:60px;border-radius:50%;border:2px solid var(--border);border-top-color:var(--teal);animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading-text{font-family:var(--font-display);font-size:1.4rem;font-style:italic;color:var(--text-mid);text-align:center;max-width:400px;line-height:1.6;}
+.loading-sub{font-size:0.75rem;color:var(--text-soft);letter-spacing:0.1em;text-transform:uppercase;}
+
+/* RESULTS */
+.results-screen{display:none;min-height:100vh;padding:100px 0 80px;}
+.results-screen.active{display:block;}
+.results-header{text-align:center;margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border);}
+.results-name{font-family:var(--font-display);font-size:clamp(1.8rem,4vw,2.8rem);font-weight:300;color:var(--white);margin-bottom:0.5rem;}
+.results-name em{color:var(--teal);font-style:italic;}
+.results-tagline{font-size:0.8rem;color:var(--text-soft);letter-spacing:0.12em;text-transform:uppercase;}
+.results-body{font-family:var(--font-body);font-size:0.92rem;font-weight:300;line-height:1.95;color:var(--text);margin-bottom:2rem;}
+.results-body p{margin-bottom:1.25rem;}
+.results-principle{background:linear-gradient(135deg,rgba(0,200,180,0.08),rgba(201,168,76,0.05));border:1px solid var(--border-gold);border-radius:4px;padding:1.75rem 2rem;margin:2rem 0;}
+.results-principle-label{font-size:0.6rem;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;display:block;}
+.results-principle-name{font-family:var(--font-display);font-size:1.6rem;font-style:italic;font-weight:300;color:var(--teal);margin-bottom:0.5rem;}
+.results-principle-desc{font-size:0.82rem;color:var(--text-mid);line-height:1.8;}
+.results-email-note{font-size:0.78rem;color:var(--text-soft);text-align:center;margin:2rem 0;font-style:italic;}
+.results-cta{text-align:center;margin-top:3rem;padding-top:2.5rem;border-top:1px solid var(--border);}
+.results-cta-hed{font-family:var(--font-display);font-size:clamp(1.5rem,3vw,2.2rem);font-weight:300;color:var(--white);margin-bottom:1rem;line-height:1.2;}
+.results-cta-hed em{color:var(--teal);font-style:italic;}
+.results-cta-sub{font-size:0.85rem;color:var(--text-mid);line-height:1.8;margin-bottom:2rem;max-width:480px;margin-left:auto;margin-right:auto;}
+
+/* ERROR */
+.error-msg{background:rgba(220,60,60,0.1);border:1px solid rgba(220,60,60,0.3);border-radius:var(--radius);padding:0.75rem 1rem;font-size:0.8rem;color:#ff8080;margin-top:0.75rem;display:none;}
+
+/* ── MOBILE READABILITY — matches site standard ── */
+@media(max-width:600px){
+  .check-grid{grid-template-columns:1fr;}
+  .btn-row{flex-direction:column;align-items:stretch;}
+  .btn-primary,.btn-secondary{justify-content:center;}
+}
+
+@media(max-width:768px){
+  body {
+    font-size: 16px;
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+  .screen-sub {
+    font-size: 1rem;
+    line-height: 1.9;
+    color: rgba(255,255,255,0.82);
+  }
+  .question-text {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.88);
+    line-height: 1.85;
+  }
+  .check-item {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.8);
+    padding: 0.85rem 1rem;
+    min-height: 44px;
+  }
+  .disclaimer {
+    font-size: 0.85rem;
+    line-height: 1.85;
+    color: rgba(255,255,255,0.75);
+  }
+  .field-input {
+    font-size: 1rem;
+    padding: 1rem;
+    min-height: 44px;
+  }
+  .results-body {
+    font-size: 1rem;
+    line-height: 1.95;
+    color: rgba(255,255,255,0.88);
+  }
+  .btn-primary, .btn-secondary {
+    min-height: 44px;
+    font-size: 0.7rem;
+  }
+  .scale-input {
+    height: 6px;
+  }
+  .scale-input::-webkit-slider-thumb {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<!-- PROGRESS BAR -->
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <img src="anju-logo.jpg" alt="Anju Redheendran" style="height:44px;width:auto;" onerror="this.style.display='none'">
+  </a>
+  <span class="nav-stage" id="navStage">The Body Map™</span>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 0 — WELCOME + IDENTITY + DISCLAIMER
+════════════════════════════════════════════ -->
+<div class="screen active" id="screen-0">
+  <div class="container">
+    <div class="stage-dots">
+      <div class="stage-dot active" id="dot-0"></div>
+      <div class="stage-dot" id="dot-1"></div>
+      <div class="stage-dot" id="dot-2"></div>
+      <div class="stage-dot" id="dot-3"></div>
+      <div class="stage-dot" id="dot-4"></div>
+      <div class="stage-dot" id="dot-5"></div>
+    </div>
+
+    <span class="eyebrow">Body Literacy™ · ICU-1111</span>
+    <h1 class="screen-title">Your Personal<br><em>Body Map™</em></h1>
+    <p class="screen-sub">You've been living in this body your whole life. But has anyone ever shown you what it's been trying to say? This assessment takes about 5 minutes. What you get back may take your breath away.</p>
+
+    <div class="disclaimer">
+      <strong>Before we begin — please read this.</strong><br><br>
+      This assessment is for educational and self-reflective purposes only. It is not a diagnostic tool, a clinical evaluation, or a substitute for therapy, medical advice, or professional mental health support. Completing this assessment does not create a therapeutic or coaching relationship.<br><br>
+      Some questions touch on sensitive experiences including childhood adversity, loss, and trauma. <strong>You are never required to answer any question.</strong> Select "I'd rather not say" at any time — your results will still be meaningful.<br><br>
+      Information you enter is used only to generate your personalized Body Map™ and is not stored, sold, or shared beyond delivering your results.<br><br>
+      If you are currently in crisis or need immediate support, please contact the <strong><a href="tel:988">988 Suicide and Crisis Lifeline</a></strong> by calling or texting <strong>988</strong>.
+    </div>
+
+    <p class="screen-sub" style="margin-bottom:1.5rem;font-size:0.82rem;">Enter your name and email below — we'll send your complete Personal Body Map™ Results there so you can refer back to them anytime.</p>
+
+    <div class="field-group">
+      <label class="field-label" for="firstName">First Name</label>
+      <input class="field-input" type="text" id="firstName" placeholder="Your first name" autocomplete="given-name">
+    </div>
+    <div class="field-group">
+      <label class="field-label" for="email">Email Address</label>
+      <input class="field-input" type="email" id="email" placeholder="Where should we send your results?" autocomplete="email">
+      <div class="error-msg" id="emailError">Please enter a valid email address.</div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-primary" onclick="startAssessment()">Begin My Body Map™ →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 1 — PRESENTING LAYER
+     How they feel right now
+════════════════════════════════════════ -->
+<div class="screen" id="screen-1">
+  <div class="container">
+    <div class="stage-dots">
+      <div class="stage-dot done"></div>
+      <div class="stage-dot active"></div>
+      <div class="stage-dot"></div>
+      <div class="stage-dot"></div>
+      <div class="stage-dot"></div>
+      <div class="stage-dot"></div>
+    </div>
+
+    <span class="eyebrow">Stage 1 of 5 — Where You Are Now</span>
+    <h2 class="screen-title">Let's start with<br><em>how you feel.</em></h2>
+    <p class="screen-sub">No right answers. Just honest ones. Select everything that resonates — even if it feels like too much.</p>
+
+    <div class="section-heading">Which of these feel true for you right now?</div>
+    <div class="question-block">
+      <div class="check-grid" id="presentingSymptoms">
+        <div class="check-item" onclick="toggleCheck(this,'presenting')"><div class="check-box"></div>I'm exhausted in a way sleep doesn't fix</div>
+        <div class="check-item" onclick="toggleCheck(this,'presenting')"><div class="check-box"></div>I feel like I'm always performing for others</div>
+        <div class="check-item" onclick="toggleCheck(this,'presenting')"><div class="check-box"></div>I've achieved a lot but still feel empty</div>
+        <div class="check-item" onclick="toggleCheck(this,'presenting')"><div class="check-box"></div>I don't know who I am outside of what I do</div>
+        <div class="check-item" onclick="toggleCheck(this,'presenting')"><div class="check-box"></div>I say yes when I mean no — constantly</div>
+        <div class="check-item" onclick="toggleCheck(this,'presenting')"><div class="check-box"></div>I feel responsible for everyone else's feelings</div>
+        <div class="check-item" onclick="toggleCheck(this,'presenting')"><div class="check-box"></div>I'm angry underneath but can't show it</div>
+        <div class="check-item" onclick="toggleCheck(this,'presenting')"><div class="check-box"></div>I feel safest when I'm useful</div>
+        <div class="check-item" onclick="toggleCheck(this,'presenting')"><div class="check-box"></div>I'm waiting to feel like enough</div>
+        <div class="check-item" onclick="toggleCheck(this,'presenting')"><div class="check-box"></div>I've lost myself somewhere along the way</div>
+        <div class="check-item" onclick="toggleCheck(this,'presenting')"><div class="check-box"></div>I'm afraid of what stillness might bring up</div>
+        <div class="check-item" onclick="toggleCheck(this,'presenting')"><div class="check-box"></div>I feel fragmented — different versions in different spaces</div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+    <div class="section-heading">How long have you felt this way?</div>
+    <div class="question-block">
+      <div class="check-grid" id="duration">
+        <div class="check-item" onclick="toggleSingle(this,'duration')"><div class="check-box"></div>A few months</div>
+        <div class="check-item" onclick="toggleSingle(this,'duration')"><div class="check-box"></div>A year or two</div>
+        <div class="check-item" onclick="toggleSingle(this,'duration')"><div class="check-box"></div>Most of my adult life</div>
+        <div class="check-item" onclick="toggleSingle(this,'duration')"><div class="check-box"></div>As long as I can remember</div>
+        <div class="check-item prefer-not" onclick="toggleSingle(this,'duration')"><div class="check-box"></div>I'd rather not say</div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-primary" onclick="nextScreen(1)">Continue →</button>
+      <button class="btn-secondary" onclick="prevScreen(1)">← Back</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 2 — LIFE EVENTS LAYER
+     What they've quietly carried
+════════════════════════════════════════ -->
+<div class="screen" id="screen-2">
+  <div class="container">
+    <div class="stage-dots">
+      <div class="stage-dot done"></div>
+      <div class="stage-dot done"></div>
+      <div class="stage-dot active"></div>
+      <div class="stage-dot"></div>
+      <div class="stage-dot"></div>
+      <div class="stage-dot"></div>
+    </div>
+
+    <span class="eyebrow">Stage 2 of 5 — What You've Carried</span>
+    <h2 class="screen-title">Things you may have<br><em>carried quietly.</em></h2>
+    <p class="screen-sub">This section asks about experiences that shape us — often without us realizing how much. You never have to answer anything. "I'd rather not say" is always an option and your results will still be meaningful.</p>
+
+    <div class="section-heading">Early losses and instability</div>
+    <div class="question-block">
+      <p class="question-text">Which of these were part of your story growing up?</p>
+      <div class="check-grid" id="earlyExperiences">
+        <div class="check-item" data-pattern="pairing" onclick="toggleCheck(this,'early')"><div class="check-box"></div>Lost a parent or primary caregiver</div>
+        <div class="check-item" data-pattern="pairing" onclick="toggleCheck(this,'early')"><div class="check-box"></div>Parents divorced or separated</div>
+        <div class="check-item" data-pattern="audition" onclick="toggleCheck(this,'early')"><div class="check-box"></div>Felt you had to earn love or approval</div>
+        <div class="check-item" data-pattern="audition" onclick="toggleCheck(this,'early')"><div class="check-box"></div>Were the responsible one — the fixer or caretaker</div>
+        <div class="check-item" data-pattern="squeeze" onclick="toggleCheck(this,'early')"><div class="check-box"></div>Grew up in an unpredictable or chaotic household</div>
+        <div class="check-item" data-pattern="tank" onclick="toggleCheck(this,'early')"><div class="check-box"></div>Were told your feelings were too much</div>
+        <div class="check-item" data-pattern="tank" onclick="toggleCheck(this,'early')"><div class="check-box"></div>Learned to hide what you really felt</div>
+        <div class="check-item" data-pattern="pairing" onclick="toggleCheck(this,'early')"><div class="check-box"></div>Experienced emotional neglect or felt invisible</div>
+        <div class="check-item prefer-not" onclick="toggleCheck(this,'early')"><div class="check-box"></div>I'd rather not say</div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+    <div class="section-heading">Experiences that left a mark</div>
+    <div class="question-block">
+      <p class="question-text">Have any of these been part of your life — at any age?</p>
+      <span class="question-note">You only need to acknowledge what feels true. No details required.</span>
+      <div class="check-grid" id="lifeEvents">
+        <div class="check-item" data-pattern="pairing" onclick="toggleCheck(this,'events')"><div class="check-box"></div>Betrayal by someone you deeply trusted</div>
+        <div class="check-item" data-pattern="squeeze" onclick="toggleCheck(this,'events')"><div class="check-box"></div>A relationship that made you question your reality</div>
+        <div class="check-item" data-pattern="audition" onclick="toggleCheck(this,'events')"><div class="check-box"></div>Loving someone who couldn't fully show up for you</div>
+        <div class="check-item" data-pattern="tank" onclick="toggleCheck(this,'events')"><div class="check-box"></div>Carrying a secret that felt too heavy to share</div>
+        <div class="check-item" data-pattern="squeeze" onclick="toggleCheck(this,'events')"><div class="check-box"></div>A sudden loss — job, relationship, identity, home</div>
+        <div class="check-item" data-pattern="audition" onclick="toggleCheck(this,'events')"><div class="check-box"></div>Public failure or loss of reputation</div>
+        <div class="check-item" data-pattern="pairing" onclick="toggleCheck(this,'events')"><div class="check-box"></div>Violation of your body or boundaries</div>
+        <div class="check-item" data-pattern="tank" onclick="toggleCheck(this,'events')"><div class="check-box"></div>Years of giving more than you received</div>
+        <div class="check-item prefer-not" onclick="toggleCheck(this,'events')"><div class="check-box"></div>I'd rather not say</div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+    <div class="section-heading">How resolved does it feel?</div>
+    <div class="question-block">
+      <p class="question-text">When you think about the hardest things you've been through — how much have you been able to process or put down?</p>
+      <div class="scale-row">
+        <span class="scale-label">Still very raw</span>
+        <input type="range" class="scale-input" id="resolutionScale" min="1" max="5" value="3" oninput="updateScale(this,'resolutionVal')">
+        <span class="scale-value" id="resolutionVal">3</span>
+        <span class="scale-label">Mostly resolved</span>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-primary" onclick="nextScreen(2)">Continue →</button>
+      <button class="btn-secondary" onclick="prevScreen(2)">← Back</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 3 — BODY SYMPTOMS
+════════════════════════════════════════ -->
+<div class="screen" id="screen-3">
+  <div class="container">
+    <div class="stage-dots">
+      <div class="stage-dot done"></div>
+      <div class="stage-dot done"></div>
+      <div class="stage-dot done"></div>
+      <div class="stage-dot active"></div>
+      <div class="stage-dot"></div>
+      <div class="stage-dot"></div>
+    </div>
+
+    <span class="eyebrow">Stage 3 of 5 — What Your Body Is Saying</span>
+    <h2 class="screen-title">Your body has been<br><em>keeping record.</em></h2>
+    <p class="screen-sub">The body communicates what the mind refuses to process. These aren't random symptoms. They're messages. Select anything your body has been expressing — persistently, inexplicably, or recently.</p>
+
+    <div class="section-heading">Physical patterns you've noticed</div>
+    <div class="question-block">
+      <div class="check-grid" id="bodySymptoms">
+        <div class="check-item" data-body="digestive" onclick="toggleCheck(this,'body')"><div class="check-box"></div>Chronic digestive issues, IBS, nausea, bloating</div>
+        <div class="check-item" data-body="throat" onclick="toggleCheck(this,'body')"><div class="check-box"></div>Throat tightness, frequent throat issues, voice loss</div>
+        <div class="check-item" data-body="hair" onclick="toggleCheck(this,'body')"><div class="check-box"></div>Hair thinning, loss, or changes</div>
+        <div class="check-item" data-body="skin" onclick="toggleCheck(this,'body')"><div class="check-box"></div>Skin conditions — eczema, hives, rashes, sensitivity</div>
+        <div class="check-item" data-body="dental" onclick="toggleCheck(this,'body')"><div class="check-box"></div>Dental issues, jaw tension, grinding teeth</div>
+        <div class="check-item" data-body="autoimmune" onclick="toggleCheck(this,'body')"><div class="check-box"></div>Autoimmune conditions or unexplained inflammation</div>
+        <div class="check-item" data-body="thyroid" onclick="toggleCheck(this,'body')"><div class="check-box"></div>Thyroid issues or hormonal disruption</div>
+        <div class="check-item" data-body="adrenal" onclick="toggleCheck(this,'body')"><div class="check-box"></div>Chronic fatigue, burnout, adrenal exhaustion</div>
+        <div class="check-item" data-body="heart" onclick="toggleCheck(this,'body')"><div class="check-box"></div>Heart palpitations, chest tightness, anxiety attacks</div>
+        <div class="check-item" data-body="neck" onclick="toggleCheck(this,'body')"><div class="check-box"></div>Chronic neck, shoulder, or upper back tension</div>
+        <div class="check-item" data-body="sleep" onclick="toggleCheck(this,'body')"><div class="check-box"></div>Sleep issues — can't fall asleep or stay asleep</div>
+        <div class="check-item" data-body="weight" onclick="toggleCheck(this,'body')"><div class="check-box"></div>Unexplained weight changes or body image shifts</div>
+        <div class="check-item prefer-not" onclick="toggleCheck(this,'body')"><div class="check-box"></div>I'd rather not say</div>
+        <div class="check-item" onclick="toggleCheck(this,'body')"><div class="check-box"></div>None of these currently</div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-primary" onclick="nextScreen(3)">Continue →</button>
+      <button class="btn-secondary" onclick="prevScreen(3)">← Back</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 4 — ADDICTION / NUMBING
+════════════════════════════════════════ -->
+<div class="screen" id="screen-4">
+  <div class="container">
+    <div class="stage-dots">
+      <div class="stage-dot done"></div>
+      <div class="stage-dot done"></div>
+      <div class="stage-dot done"></div>
+      <div class="stage-dot done"></div>
+      <div class="stage-dot active"></div>
+      <div class="stage-dot"></div>
+    </div>
+
+    <span class="eyebrow">Stage 4 of 5 — Patterns of Escape</span>
+    <h2 class="screen-title">How have you been<br><em>managing the weight?</em></h2>
+    <p class="screen-sub">Sometimes the body finds relief through behavior rather than sensation. These patterns are never flaws — they were intelligent survival strategies. Have any of these been part of your story?</p>
+
+    <div class="section-heading">Patterns of escape or numbing</div>
+    <div class="question-block">
+      <span class="question-note">This includes current patterns and past ones. Someone else's addiction shapes us just as much as our own.</span>
+      <div class="check-grid" id="addictionPatterns">
+        <div class="check-item" data-pattern="audition" onclick="toggleCheck(this,'addiction')"><div class="check-box"></div>Workaholism — using achievement to feel safe</div>
+        <div class="check-item" data-pattern="tank" onclick="toggleCheck(this,'addiction')"><div class="check-box"></div>Alcohol — using it to decompress or feel normal</div>
+        <div class="check-item" data-pattern="tank" onclick="toggleCheck(this,'addiction')"><div class="check-box"></div>Substances — using them to feel or to stop feeling</div>
+        <div class="check-item" data-pattern="squeeze" onclick="toggleCheck(this,'addiction')"><div class="check-box"></div>Gambling — the rush, the escape, the control it offers</div>
+        <div class="check-item" data-pattern="pairing" onclick="toggleCheck(this,'addiction')"><div class="check-box"></div>Sex or pornography — using intimacy to fill a void</div>
+        <div class="check-item" data-pattern="tank" onclick="toggleCheck(this,'addiction')"><div class="check-box"></div>Food — eating to comfort, restrict, or punish</div>
+        <div class="check-item" data-pattern="audition" onclick="toggleCheck(this,'addiction')"><div class="check-box"></div>Shopping or spending — acquiring to feel worthy</div>
+        <div class="check-item" data-pattern="squeeze" onclick="toggleCheck(this,'addiction')"><div class="check-box"></div>Gaming or screens — disappearing to feel in control</div>
+        <div class="check-item" data-pattern="pairing" onclick="toggleCheck(this,'addiction')"><div class="check-box"></div>Relationships — using love to feel real or complete</div>
+        <div class="check-item" data-pattern="tank" onclick="toggleCheck(this,'addiction')"><div class="check-box"></div>A parent or partner had significant addiction issues</div>
+        <div class="check-item prefer-not" onclick="toggleCheck(this,'addiction')"><div class="check-box"></div>I'd rather not say</div>
+        <div class="check-item" onclick="toggleCheck(this,'addiction')"><div class="check-box"></div>None of these apply</div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+    <div class="section-heading">How long have these patterns been present?</div>
+    <div class="question-block">
+      <div class="check-grid" id="bodyDuration">
+        <div class="check-item" onclick="toggleSingle(this,'bodyDuration')"><div class="check-box"></div>Recently — past year or so</div>
+        <div class="check-item" onclick="toggleSingle(this,'bodyDuration')"><div class="check-box"></div>Several years</div>
+        <div class="check-item" onclick="toggleSingle(this,'bodyDuration')"><div class="check-box"></div>Most of my adult life</div>
+        <div class="check-item" onclick="toggleSingle(this,'bodyDuration')"><div class="check-box"></div>Since childhood or adolescence</div>
+        <div class="check-item prefer-not" onclick="toggleSingle(this,'bodyDuration')"><div class="check-box"></div>I'd rather not say</div>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-primary" onclick="nextScreen(4)">Continue →</button>
+      <button class="btn-secondary" onclick="prevScreen(4)">← Back</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     SCREEN 5 — FINAL QUESTIONS
+════════════════════════════════════════ -->
+<div class="screen" id="screen-5">
+  <div class="container">
+    <div class="stage-dots">
+      <div class="stage-dot done"></div>
+      <div class="stage-dot done"></div>
+      <div class="stage-dot done"></div>
+      <div class="stage-dot done"></div>
+      <div class="stage-dot done"></div>
+      <div class="stage-dot active"></div>
+    </div>
+
+    <span class="eyebrow">Stage 5 of 5 — Almost There</span>
+    <h2 class="screen-title">A few final<br><em>questions.</em></h2>
+    <p class="screen-sub">These last questions help us understand where you are in your process — not just what happened, but how alive it still is.</p>
+
+    <div class="section-heading">What are you hoping to understand?</div>
+    <div class="question-block">
+      <div class="check-grid" id="hopes">
+        <div class="check-item" onclick="toggleCheck(this,'hopes')"><div class="check-box"></div>Why I keep repeating the same patterns</div>
+        <div class="check-item" onclick="toggleCheck(this,'hopes')"><div class="check-box"></div>Why my body keeps breaking down</div>
+        <div class="check-item" onclick="toggleCheck(this,'hopes')"><div class="check-box"></div>Why I can't seem to put myself first</div>
+        <div class="check-item" onclick="toggleCheck(this,'hopes')"><div class="check-box"></div>Why I feel so disconnected from myself</div>
+        <div class="check-item" onclick="toggleCheck(this,'hopes')"><div class="check-box"></div>Why relationships feel so hard or unsafe</div>
+        <div class="check-item" onclick="toggleCheck(this,'hopes')"><div class="check-box"></div>What my next chapter actually looks like</div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+    <div class="section-heading">Have you ever worked with a therapist or coach?</div>
+    <div class="question-block">
+      <div class="check-grid" id="priorWork">
+        <div class="check-item" onclick="toggleSingle(this,'priorWork')"><div class="check-box"></div>Yes — and it helped significantly</div>
+        <div class="check-item" onclick="toggleSingle(this,'priorWork')"><div class="check-box"></div>Yes — but something still feels unresolved</div>
+        <div class="check-item" onclick="toggleSingle(this,'priorWork')"><div class="check-box"></div>No — but I'm ready to</div>
+        <div class="check-item" onclick="toggleSingle(this,'priorWork')"><div class="check-box"></div>No — and I'm not sure yet</div>
+        <div class="check-item prefer-not" onclick="toggleSingle(this,'priorWork')"><div class="check-box"></div>I'd rather not say</div>
+      </div>
+    </div>
+
+    <hr class="section-divider">
+    <div class="section-heading">One last thing</div>
+    <div class="question-block">
+      <p class="question-text">If you could say one thing about what you're carrying that you haven't been able to say out loud — what would it be?</p>
+      <span class="question-note">This is optional. Anything you share helps personalize your results. Or leave it blank.</span>
+      <textarea class="field-input" id="finalStatement" rows="4" placeholder="You don't have to have the words. Even fragments are fine." style="resize:vertical;"></textarea>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-primary" id="submitBtn" onclick="generateResults()">Show Me My Body Map™ →</button>
+      <button class="btn-secondary" onclick="prevScreen(5)">← Back</button>
+    </div>
+    <div class="error-msg" id="submitError" style="display:none;margin-top:1rem;">Something went wrong generating your results. Please try again.</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     LOADING SCREEN
+════════════════════════════════════════ -->
+<div class="loading-screen" id="loadingScreen">
+  <div class="loading-pulse"></div>
+  <p class="loading-text">Reading what you've shared and translating it into your Personal Body Map™...</p>
+  <p class="loading-sub">This takes about 30 seconds</p>
+</div>
+
+<!-- ═══════════════════════════════════════
+     RESULTS SCREEN
+════════════════════════════════════════ -->
+<div class="results-screen" id="resultsScreen">
+  <div class="container">
+    <div class="results-header">
+      <p class="results-tagline">Your Personal Body Map™ · ICU-1111</p>
+      <h2 class="results-name" id="resultsName">Loading...</h2>
+      <p class="results-tagline" style="margin-top:0.5rem;">Here's what your body has been trying to say.</p>
+    </div>
+
+    <div id="resultsContent"></div>
+
+    <p class="results-email-note" id="resultsEmailNote"></p>
+
+    <div class="results-cta">
+      <h3 class="results-cta-hed">Ready to go<br><em>deeper?</em></h3>
+      <p class="results-cta-sub">Your Body Map™ shows you the pattern. The work is learning to move through it — without abandoning yourself in the process.</p>
+      <div class="btn-row" style="justify-content:center;">
+        <a href="https://calendly.com/icu1111/30-min-discovery-call" target="_blank" class="btn-primary">Book a Discovery Call →</a>
+        <a href="work-with-me.html" class="btn-secondary">Learn More</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════
+// CONFIGURATION — ADD YOUR KEYS HERE
+// ═══════════════════════════════════════
+const ANTHROPIC_API_KEY = 'x-api-key': 'ANTHROPIC_API_KEY_HERE'; // single key only — starts with sk-ant-api03-
+const EMAILJS_PUBLIC_KEY  = 'xb9tK3mogSaUPlpge';
+const EMAILJS_SERVICE_ID  = 'service_caapapt';
+const EMAILJS_TEMPLATE_ID = 'template_1q45r0s';
+
+emailjs.init(EMAILJS_PUBLIC_KEY);
+
+// ═══════════════════════════════════════
+// SESSION STATE — tied to person, not device
+// ═══════════════════════════════════════
+let session = {
+  firstName: '',
+  email: '',
+  presenting: [],
+  duration: '',
+  earlyExperiences: [],
+  lifeEvents: [],
+  resolutionScale: 3,
+  bodySymptoms: [],
+  addictionPatterns: [],
+  bodyDuration: '',
+  hopes: [],
+  priorWork: '',
+  finalStatement: ''
+};
+
+let currentScreen = 0;
+let isSubmitting = false;
+
+// ═══════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════
+function startAssessment() {
+  const firstName = document.getElementById('firstName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const emailError = document.getElementById('emailError');
+
+  if (!firstName || !email) {
+    emailError.textContent = 'Please enter your name and email to continue.';
+    emailError.style.display = 'block';
+    return;
+  }
+  if (!isValidEmail(email)) {
+    emailError.textContent = 'Please enter a valid email address.';
+    emailError.style.display = 'block';
+    return;
+  }
+  emailError.style.display = 'none';
+  session.firstName = firstName;
+  session.email = email;
+  goToScreen(1);
+}
+
+function nextScreen(from) {
+  collectScreen(from);
+  goToScreen(from + 1);
+}
+
+function prevScreen(from) {
+  goToScreen(from - 1);
+}
+
+function goToScreen(n) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById('screen-' + n);
+  if (target) {
+    target.classList.add('active');
+    currentScreen = n;
+    updateProgress(n);
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+}
+
+function updateProgress(n) {
+  const pct = (n / 6) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  const stages = ['The Body Map™', 'Stage 1 — How You Feel', 'Stage 2 — What You\'ve Carried', 'Stage 3 — Your Body', 'Stage 4 — Patterns', 'Stage 5 — Final Questions'];
+  document.getElementById('navStage').textContent = stages[n] || 'The Body Map™';
+}
+
+// ═══════════════════════════════════════
+// CHECKBOX INTERACTIONS
+// ═══════════════════════════════════════
+function toggleCheck(el, group) {
+  el.classList.toggle('selected');
+  if (el.classList.contains('selected')) {
+    el.querySelector('.check-box').textContent = '✓';
+  } else {
+    el.querySelector('.check-box').textContent = '';
+  }
+}
+
+function toggleSingle(el, group) {
+  const parent = el.parentElement;
+  parent.querySelectorAll('.check-item').forEach(item => {
+    item.classList.remove('selected');
+    item.querySelector('.check-box').textContent = '';
+  });
+  el.classList.add('selected');
+  el.querySelector('.check-box').textContent = '✓';
+}
+
+function updateScale(input, valId) {
+  document.getElementById(valId).textContent = input.value;
+}
+
+// ═══════════════════════════════════════
+// COLLECT DATA FROM EACH SCREEN
+// ═══════════════════════════════════════
+function collectScreen(n) {
+  if (n === 1) {
+    session.presenting = getSelected('presentingSymptoms');
+    session.duration = getSelected('duration').join('');
+  }
+  if (n === 2) {
+    session.earlyExperiences = getSelectedWithData('earlyExperiences', 'pattern');
+    session.lifeEvents = getSelectedWithData('lifeEvents', 'pattern');
+    session.resolutionScale = document.getElementById('resolutionScale').value;
+  }
+  if (n === 3) {
+    session.bodySymptoms = getSelectedWithData('bodySymptoms', 'body');
+  }
+  if (n === 4) {
+    session.addictionPatterns = getSelectedWithData('addictionPatterns', 'pattern');
+    session.bodyDuration = getSelected('bodyDuration').join('');
+  }
+  if (n === 5) {
+    session.hopes = getSelected('hopes');
+    session.priorWork = getSelected('priorWork').join('');
+    session.finalStatement = document.getElementById('finalStatement').value.trim();
+  }
+}
+
+function getSelected(containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return [];
+  return Array.from(container.querySelectorAll('.check-item.selected'))
+    .map(el => el.textContent.trim().replace('✓', '').trim());
+}
+
+function getSelectedWithData(containerId, dataAttr) {
+  const container = document.getElementById(containerId);
+  if (!container) return [];
+  return Array.from(container.querySelectorAll('.check-item.selected'))
+    .map(el => ({
+      text: el.textContent.trim().replace('✓', '').trim(),
+      pattern: el.dataset[dataAttr] || ''
+    }));
+}
+
+// ═══════════════════════════════════════
+// DETERMINE DOMINANT PAST PRINCIPLE
+// ═══════════════════════════════════════
+function getDominantPrinciple() {
+  const counts = { pairing: 0, audition: 0, squeeze: 0, tank: 0 };
+  [...session.earlyExperiences, ...session.lifeEvents].forEach(item => {
+    if (item.pattern && counts[item.pattern] !== undefined) {
+      counts[item.pattern]++;
+    }
+  });
+  const max = Math.max(...Object.values(counts));
+  if (max === 0) return 'audition'; // default
+  return Object.keys(counts).find(k => counts[k] === max) || 'audition';
+}
+
+const PRINCIPLES = {
+  pairing: {
+    name: 'The Pairing',
+    tagline: 'Wounds recognize wounds.',
+    description: 'You have a pattern of being drawn to people and situations that mirror your earliest wounds — not because something is wrong with you, but because familiarity feels like safety. The work is learning to recognize the difference between familiar and safe.'
+  },
+  audition: {
+    name: 'The Audition',
+    tagline: 'Performing for love instead of receiving it.',
+    description: 'Somewhere early, you learned that love had to be earned — that you needed to be useful, exceptional, or perfectly put together to deserve it. So you\'ve been auditioning ever since. The exhaustion you feel isn\'t from working too hard. It\'s from performing too long.'
+  },
+  squeeze: {
+    name: 'The Squeeze',
+    tagline: 'Pressure reveals truth.',
+    description: 'You\'ve been under pressure long enough that it has revealed something important: what you\'ve been suppressing, what you\'ve been tolerating, and what you can no longer carry the way you\'ve been carrying it. That pressure isn\'t breaking you. It\'s showing you what needs to change.'
+  },
+  tank: {
+    name: 'The Tank',
+    tagline: 'What you carry is what you pour.',
+    description: 'You have been giving from a tank that never gets refilled — absorbing others\' pain, carrying others\' weight, pouring yourself out in every direction. The depletion you feel isn\'t a character flaw. It\'s the natural result of a system that was never designed to be sustainable.'
+  }
+};
+
+// ═══════════════════════════════════════
+// GENERATE RESULTS VIA CLAUDE API
+// ═══════════════════════════════════════
+async function generateResults() {
+  if (isSubmitting) return;
+  isSubmitting = true;
+  collectScreen(5);
+
+  const submitBtn = document.getElementById('submitBtn');
+  submitBtn.disabled = true;
+
+  // Hide all screens, show loading
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('loadingScreen').classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+
+  const dominant = getDominantPrinciple();
+  const principle = PRINCIPLES[dominant];
+
+  // Build prompt
+  const prompt = buildPrompt(principle);
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-5',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      const errMsg = data?.error?.message || `HTTP ${response.status}`;
+      throw new Error(`API error: ${errMsg}`);
+    }
+
+    const resultText = data.content?.[0]?.text || '';
+
+    if (!resultText) throw new Error('No result text');
+
+    // Send email FIRST — independent, never blocks results display
+    sendResultsEmail(resultText, principle).catch(err => {
+      console.error('Email send failed:', err);
+    });
+
+    // Show results
+    showResults(resultText, principle);
+
+  } catch (err) {
+    console.error('Error:', err);
+    document.getElementById('loadingScreen').classList.remove('active');
+    document.getElementById('screen-5').classList.add('active');
+    const errEl = document.getElementById('submitError');
+    errEl.textContent = err.message.includes('API error')
+      ? `There was a problem with the API: ${err.message}. Please check your API key and try again.`
+      : 'Something went wrong generating your results. Please try again.';
+    errEl.style.display = 'block';
+    submitBtn.disabled = false;
+    isSubmitting = false;
+  }
+}
+
+function buildPrompt(principle) {
+  const bodyList = session.bodySymptoms.map(s => s.text).filter(t => !t.includes('rather not') && !t.includes('None of')).join(', ') || 'none selected';
+  const addictionList = session.addictionPatterns ? session.addictionPatterns.map(s => s.text).filter(t => !t.includes('rather not') && !t.includes('None of')).join(', ') || 'none noted' : 'none noted';
+  const presentingList = session.presenting.filter(t => !t.includes('rather not')).join(', ') || 'none selected';
+  const earlyList = session.earlyExperiences.map(s => s.text).filter(t => !t.includes('rather not')).join(', ') || 'none selected';
+  const eventsList = session.lifeEvents.map(s => s.text).filter(t => !t.includes('rather not')).join(', ') || 'none selected';
+  const resolution = session.resolutionScale;
+  const hopes = session.hopes.filter(t => !t.includes('rather not')).join(', ') || 'not specified';
+  const finalStatement = session.finalStatement || '';
+
+  return `You are Anju Redheendran — ICU nurse, healthcare informatics executive, author of "I'll Have What SHE's Having!", and founder of ICU-1111. You have developed Body Literacy™ — a methodology for translating what the body expresses back to the emotional and identity experiences that produced it.
+
+Write a Personal Body Map™ result for ${session.firstName}. This is a deeply personal, clinically grounded, emotionally precise response in your voice. Warm but not soft. Direct but not harsh. You are not diagnosing — you are translating.
+
+Here is what ${session.firstName} shared:
+
+HOW THEY FEEL NOW: ${presentingList}
+EARLY EXPERIENCES: ${earlyList}  
+LIFE EVENTS: ${eventsList}
+RESOLUTION LEVEL (1=raw, 5=resolved): ${resolution}/5
+BODY SYMPTOMS: ${bodyList}
+EXTERNAL COPING OR NUMBING PATTERNS (addictions, escapes — own or in family): ${addictionList}
+BODY DURATION: ${session.bodyDuration}
+WHAT THEY HOPE TO UNDERSTAND: ${hopes}
+PRIOR THERAPY/COACHING: ${session.priorWork}
+THEIR OWN WORDS: ${finalStatement || '(left blank)'}
+DOMINANT PAST PRINCIPLE: ${principle.name} — ${principle.tagline}
+
+Write THREE paragraphs:
+
+PARAGRAPH 1 — The Recognition: Name specifically what ${session.firstName} has been carrying. Make them feel seen in a way they haven't felt before. Reference their actual symptoms and experiences. Do not be generic. The opening sentence should stop them cold.
+
+PARAGRAPH 2 — The Body Translation: Connect 2-3 of their specific body symptoms to the emotional/identity experiences behind them. Use Body Literacy™ language — the body is not broken, it is communicating. Be specific. For example: digestive issues often reflect something the body was forced to accept that the mind couldn't process. Throat/voice issues often reflect truth that wasn't safe to speak. Hair loss often follows shame or identity rupture. Jaw/shoulder tension often holds anger that was never allowed expression. Dental issues often reflect how we present ourselves to the world and fears around reputation or being seen. If addiction patterns are present — their own or a parent/partner's — acknowledge this thread directly. Workaholism is achieving to feel safe. Substance use is numbing what can't be processed. Relationship addiction is using love to feel real. Compulsive behavior is always a coping mechanism, never a character flaw. Name it as the intelligent survival strategy it was — and what it costs now.
+
+PARAGRAPH 3 — The Possibility: Not a sales pitch. A genuine statement of what becomes possible when this pattern is named and addressed. End with one sentence that feels like a door opening — not a closing.
+
+TONE: Anju's voice. Clinical without being cold. Personal without being therapy. Confident without being preachy. No bullet points. No headers. Just three powerful paragraphs. Total length: 250-350 words.`;
+}
+
+function showResults(text, principle) {
+  document.getElementById('loadingScreen').classList.remove('active');
+  document.getElementById('resultsScreen').classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+
+  document.getElementById('resultsName').innerHTML = `${session.firstName}, <em>here is your map.</em>`;
+
+  // Parse paragraphs
+  const paragraphs = text.split('\n\n').filter(p => p.trim().length > 0);
+  const resultsHTML = `
+    <div class="results-body">
+      ${paragraphs.map(p => `<p>${p.trim()}</p>`).join('')}
+    </div>
+    <div class="results-principle">
+      <span class="results-principle-label">Your Dominant PAST Principle</span>
+      <div class="results-principle-name">${principle.name}</div>
+      <p class="results-principle-desc"><em>"${principle.tagline}"</em><br><br>${principle.description}</p>
+    </div>
+  `;
+  document.getElementById('resultsContent').innerHTML = resultsHTML;
+  document.getElementById('resultsEmailNote').textContent = `A copy of your Personal Body Map™ Results has been sent to ${session.email}.`;
+}
+
+// ═══════════════════════════════════════
+// SEND EMAIL VIA EMAILJS
+// ═══════════════════════════════════════
+async function sendResultsEmail(resultText, principle) {
+  const paragraphs = resultText.split('\n\n').filter(p => p.trim().length > 0);
+  const bodyText = paragraphs.map(p => p.trim()).join('\n\n');
+
+  const templateParams = {
+    to_name:      session.firstName,
+    to_email:     session.email,
+    email:        session.email,
+    name:         session.firstName,
+    results_html: bodyText,
+    principle_name: principle.name,
+    principle_tag:  principle.tagline,
+    principle_desc: principle.description
+  };
+
+  try {
+    await emailjs.send(
+      EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_ID,
+      templateParams,
+      EMAILJS_PUBLIC_KEY
+    );
+  } catch (err) {
+    console.error('Email send error:', err);
+    // Results already shown — email failure is silent to user
+  }
+}
+
+// ═══════════════════════════════════════
+// UTILITIES
+// ═══════════════════════════════════════
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+</script>
+</body>
+</html>
