@@ -1,0 +1,13 @@
+# Netlify _redirects file for anjuredheendran.com
+# Place this file in the ROOT of your Netlify deploy folder (same level as index.html)
+# These 301 redirects fix old indexed URLs that are splitting your domain authority
+
+/about-the-author       /about.html     301
+/about-the-author/      /about.html     301
+/books                  /index.html     301
+/books/                 /index.html     301
+/blogs                  /index.html     301
+/blogs/                 /index.html     301
+
+# Catch-all: any unmatched URL goes to homepage (prevents 404s)
+/*                      /index.html     200
