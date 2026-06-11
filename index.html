@@ -601,6 +601,15 @@ p,
   }
 }
 
+/* ── NAV STANDARDIZATION (mobile cut-off fix) ── */
+@media(max-width:600px){
+  .nav-cta{display:none;}
+  .nav-inner{gap:0.75rem;}
+  .nav-logo img{height:36px;}
+  .nav-logo-name{font-size:0.95rem;}
+  .nav-logo-title{font-size:0.5rem;}
+  .burger{padding:10px;margin-right:-6px;}
+}
 </style>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YQRBSFGRVN"></script>
@@ -615,13 +624,14 @@ p,
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <span class="mobile-close" onclick="closeMobile()">✕</span>
-  <a href="#about" onclick="closeMobile()">About</a>
-  <a href="#framework" onclick="closeMobile()">The Framework</a>
-  <a href="book.html" onclick="closeMobile()">Book</a>
+  <span class="mobile-close" onclick="closeMobile()" role="button" aria-label="Close menu">✕</span>
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="about.html" onclick="closeMobile()">About</a>
+  <a href="index.html#framework" onclick="closeMobile()">The Framework</a>
+  <a href="index.html#book" onclick="closeMobile()">Book</a>
   <a href="work-with-me.html" onclick="closeMobile()">Work With Me</a>
-  <a href="https://icu-1111.com" target="_blank" onclick="closeMobile()">ICU-1111</a>
-  <a href="https://calendly.com/icu1111/30-min-discovery-call" target="_blank" class="btn-primary" onclick="closeMobile()">Let's Talk</a>
+  <a href="https://icu-1111.com" target="_blank" rel="noopener" onclick="closeMobile()">ICU-1111</a>
+  <a href="https://calendly.com/icu1111/30-min-discovery-call" target="_blank" rel="noopener" class="btn-primary" onclick="closeMobile()">Let's Talk</a>
 </div>
 
 <!-- NAV -->

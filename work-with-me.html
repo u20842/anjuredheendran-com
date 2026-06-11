@@ -61,10 +61,19 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0.25rem 0;transition
 .nav-links a{font-size:0.68rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.65);transition:var(--tr)}
 .nav-links a:hover{color:var(--teal)}
 .nav-links a.active{color:var(--teal)}
-.nav-cta{padding:0.5rem 1.3rem!important;background:var(--teal);color:var(--navy)!important;font-weight:700;border-radius:2px}
-.nav-cta:hover{background:var(--teal-light)!important;color:var(--navy)!important}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px}
-.hamburger span{display:block;width:22px;height:2px;background:var(--white);transition:var(--tr);border-radius:1px}
+.nav-logo-text{display:flex;flex-direction:column;line-height:1.1}
+.nav-logo-name{font-family:var(--font-display);font-size:1.1rem;font-weight:500;letter-spacing:0.04em;color:var(--white);white-space:nowrap}
+.nav-logo-title{font-size:0.55rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.55);white-space:nowrap}
+.nav-cta{font-size:0.6rem;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;padding:0.65rem 1.4rem;background:transparent;border:1px solid var(--teal);color:var(--teal)!important;border-radius:2px;transition:var(--tr);white-space:nowrap}
+.nav-cta:hover{background:var(--teal);color:var(--navy)!important}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:10px;margin-right:-6px}
+.burger span{display:block;width:22px;height:1.5px;background:var(--white);transition:var(--tr)}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(10,22,40,0.98);z-index:200;flex-direction:column;justify-content:center;align-items:center;gap:2.5rem}
+.mobile-menu.open{display:flex}
+.mobile-menu a{font-family:var(--font-display);font-size:2rem;font-weight:300;color:var(--white);transition:var(--tr)}
+.mobile-menu a:hover{color:var(--teal)}
+.mobile-menu .btn{font-family:var(--font-body);font-size:0.72rem}
+.mobile-close{position:absolute;top:1.5rem;right:1.5rem;font-size:1.5rem;cursor:pointer;color:var(--white)}
 
 .page-hero{background:var(--navy);padding:140px 0 80px;position:relative;overflow:hidden}
 .page-hero-grid{position:absolute;inset:0;opacity:0.025;background-image:repeating-linear-gradient(0deg,transparent,transparent 64px,rgba(0,200,180,1) 64px,rgba(0,200,180,1) 65px),repeating-linear-gradient(90deg,transparent,transparent 64px,rgba(0,200,180,1) 64px,rgba(0,200,180,1) 65px)}
@@ -153,7 +162,7 @@ footer{background:var(--navy);padding:4rem 0 2rem;border-top:1px solid rgba(255,
 @media(max-width:900px){
   .offers-grid,.tstrip-inner,.exec-grid{grid-template-columns:1fr}
   .footer-inner{grid-template-columns:1fr 1fr}
-  .hamburger{display:flex}
+  .burger{display:flex}
   .nav-links{display:none}
 }
 @media(max-width:600px){
@@ -279,27 +288,54 @@ body {
 
   /* Nav */
   .nav-links { display: none; }
-  .hamburger { display: flex; }
+  .burger { display: flex; }
 }
 
+/* ── NAV STANDARDIZATION (mobile cut-off fix) ── */
+.nav-logo{height:auto;gap:0.75rem}
+.nav-logo img{height:44px}
+@media(max-width:600px){
+  .nav-cta{display:none;}
+  .nav-inner{gap:0.75rem;padding:0 1.25rem;}
+  .nav-logo img{height:36px;}
+  .nav-logo-name{font-size:0.95rem;}
+  .nav-logo-title{font-size:0.5rem;}
+}
 </style>
 </head>
 <body>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <span class="mobile-close" onclick="closeMobile()" role="button" aria-label="Close menu">✕</span>
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="about.html" onclick="closeMobile()">About</a>
+  <a href="index.html#framework" onclick="closeMobile()">The Framework</a>
+  <a href="index.html#book" onclick="closeMobile()">Book</a>
+  <a href="work-with-me.html" onclick="closeMobile()">Work With Me</a>
+  <a href="https://icu-1111.com" target="_blank" rel="noopener" onclick="closeMobile()">ICU-1111</a>
+  <a href="https://calendly.com/icu1111/30-min-discovery-call" target="_blank" rel="noopener" class="btn btn-primary" onclick="closeMobile()">Let's Talk</a>
+</div>
 
 <!-- NAV -->
 <nav id="mainNav">
   <div class="nav-inner">
     <a href="index.html" class="nav-logo">
-      <img src="anju-logo.jpg" alt="Anju Redheendran">
+      <img src="anju-logo.jpg" alt="Anju Redheendran" onerror="this.style.display='none'">
+      <div class="nav-logo-text">
+        <span class="nav-logo-name">Anju Redheendran</span>
+        <span class="nav-logo-title">RN · BSN · MBA · CLC</span>
+      </div>
     </a>
-    <div class="hamburger" onclick="toggleNav()"><span></span><span></span><span></span></div>
     <ul class="nav-links" id="navLinks">
-      <li><a href="index.html">Home</a></li>
       <li><a href="about.html">About</a></li>
+      <li><a href="index.html#framework">The Framework</a></li>
+      <li><a href="index.html#book">Book</a></li>
       <li><a href="work-with-me.html" class="active">Work With Me</a></li>
       <li><a href="https://icu-1111.com" target="_blank" rel="noopener">ICU-1111</a></li>
-      <li><a href="https://calendly.com/icu1111/30-min-discovery-call" target="_blank" rel="noopener" class="nav-cta">Let's Talk</a></li>
     </ul>
+    <a href="https://calendly.com/icu1111/30-min-discovery-call" target="_blank" rel="noopener" class="nav-cta">Let's Talk</a>
+    <div class="burger" onclick="openMobile()" role="button" aria-label="Open menu"><span></span><span></span><span></span></div>
   </div>
 </nav>
 
@@ -512,8 +548,9 @@ body {
 
 <script>
 window.addEventListener('scroll',()=>document.getElementById('mainNav').classList.toggle('scrolled',scrollY>60));
-let mOpen=false;
-function toggleNav(){const l=document.getElementById('navLinks');mOpen=!mOpen;l.style.cssText=mOpen?'display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(10,22,40,0.98);backdrop-filter:blur(16px);padding:1.5rem 2rem;gap:1.25rem;border-top:1px solid rgba(255,255,255,0.06);z-index:99;':'display:none;';}
+function openMobile(){document.getElementById('mobileMenu').classList.add('open');document.body.style.overflow='hidden';}
+function closeMobile(){document.getElementById('mobileMenu').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMobile();});
 const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target);}}),{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
