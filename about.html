@@ -38,12 +38,16 @@ body::before{content:'';position:fixed;inset:0;background-image:url("data:image/
 .wrap{position:relative;z-index:1;max-width:1060px;margin:0 auto;padding:0 2rem;}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,247,242,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:1.1rem 2.5rem;display:flex;justify-content:space-between;align-items:center;}
-.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--navy);text-decoration:none;letter-spacing:0.02em;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,22,40,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,0.06);padding:1.1rem 2.5rem;display:flex;justify-content:space-between;align-items:center;}
+.nav-logo{display:flex;align-items:center;gap:0.75rem;text-decoration:none;}
+.nav-logo img{height:44px;width:auto;object-fit:contain;}
+.nav-logo-text{display:flex;flex-direction:column;line-height:1.1;}
+.nav-logo-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:500;letter-spacing:0.04em;color:#fff;white-space:nowrap;}
+.nav-logo-title{font-size:0.55rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:rgba(255,255,255,0.55);white-space:nowrap;}
 .nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
-.nav-links a{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);text-decoration:none;font-weight:500;transition:color 0.3s;}
+.nav-links a{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.65);text-decoration:none;font-weight:500;transition:color 0.3s;}
 .nav-links a:hover,.nav-links a.active{color:var(--teal);}
-.nav-cta{font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);text-decoration:none;border:1px solid var(--border-mid);padding:0.4rem 0.9rem;transition:all 0.3s;font-weight:500;}
+.nav-cta{font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,0.25);padding:0.4rem 0.9rem;transition:all 0.3s;font-weight:500;}
 .nav-cta:hover{color:var(--teal);border-color:var(--teal);}
 
 /* HERO — split layout */
@@ -233,7 +237,13 @@ footer a:hover{color:var(--teal);}
 
 <!-- NAV -->
 <nav>
-  <a href="index.html" class="nav-logo">Anju Redheendran</a>
+  <a href="index.html" class="nav-logo">
+    <img src="anju-logo.jpg" alt="Anju Redheendran" onerror="this.style.display='none'">
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">Anju Redheendran</span>
+      <span class="nav-logo-title">RN · BSN · MBA · CLC</span>
+    </div>
+  </a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="about.html" class="active">About</a></li>
