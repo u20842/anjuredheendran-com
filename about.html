@@ -83,7 +83,15 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,22,40,0.9
 .story-image-col img{width:100%;display:block;filter:brightness(0.96);}
 .story-caption{font-size:0.68rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);margin-top:1rem;line-height:1.6;}
 .story-poem{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:0.95rem;color:var(--text-mid);line-height:1.9;margin-top:1.3rem;}
-.story-text-col{padding-top:0.5rem;}
+.story-text-col{padding-top:0.5rem;max-width:760px;margin:0 auto;}
+
+/* WHAT REMAINED */
+.remained{padding:1rem 0 6rem;}
+.remained-inner{max-width:480px;margin:0 auto;text-align:center;}
+.remained-label{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);font-weight:600;display:block;margin-bottom:2rem;}
+.remained-photo{width:100%;max-width:400px;margin:0 auto 2rem;display:block;filter:brightness(0.96);}
+.remained-poem{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.05rem,2.4vw,1.35rem);color:var(--text-mid);line-height:1.95;}
+.remained-caption{font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-light);margin-top:1.5rem;}
 .sec-label{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-light);font-weight:500;display:flex;align-items:center;gap:1rem;margin-bottom:2rem;}
 .sec-label::after{content:'';flex:1;height:1px;background:var(--border-mid);}
 .story-text-col h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3vw,2.6rem);font-weight:300;color:var(--navy);line-height:1.2;margin-bottom:1.5rem;}
@@ -286,17 +294,24 @@ footer a:hover{color:var(--teal);}
   </div>
 </section>
 
+<!-- WHAT REMAINED -->
+<section class="remained reveal">
+  <div class="wrap">
+    <div class="remained-inner">
+      <span class="remained-label">What Remained</span>
+      <img class="remained-photo" src="https://raw.githubusercontent.com/u20842/anju-media/main/Lifestyle/IMG_3181.PNG" alt="Anju Redheendran, age nine, fourth grade school photo">
+      <p class="remained-poem">Before the nurse.<br>Before the executive.<br>Before the author.<br>Before the coach.<br><br>The question was never who I would become.<br>The question was what would remain.</p>
+      <p class="remained-caption">Age nine. Fourth grade.</p>
+    </div>
+  </div>
+</section>
+
 <!-- STORY -->
 <div class="wrap"><div class="divider"><span>The Story</span></div></div>
 
 <section class="story">
   <div class="wrap">
-    <div class="story-grid">
-      <div class="story-image-col reveal">
-        <img src="https://raw.githubusercontent.com/u20842/anju-media/main/Lifestyle/IMG_3181.PNG" alt="Anju Redheendran, age nine, fourth grade school photo">
-        <p class="story-poem">Before the nurse.<br>Before the executive.<br>Before the author.<br>Before the coach.<br><br>The question was never who I would become.<br>The question was what would remain.</p>
-      </div>
-      <div class="story-text-col reveal" style="transition-delay:0.15s;">
+      <div class="story-text-col">
         <div class="sec-label">Origin</div>
         <h2>I have always known<br>I was <em>more than one thing.</em></h2>
         <p class="body-text">Since I was a teenager, I've said it: I'm not linear. I'm multifaceted. I couldn't fit myself into a single lane for long without feeling the pull of everything else I was. While the world kept rewarding the parts of me that were legible — the nurse, the executive, the achiever — I always knew there was more underneath.</p>
@@ -316,7 +331,6 @@ footer a:hover{color:var(--teal);}
         <p class="body-text">Long before I had language for it, I understood artistry. Classically trained in Bharatanatyam and Carnatic music, I learned what it meant to bring discipline, grace, and nuance to a craft. That same quality — the artistry of performance — translated into the ICU, into the boardroom, into coaching, into everything I've built.</p>
         <p class="body-text">What appeared to others as unrelated careers was always one continuous thread: the integration of systems, humanity, and expression.</p>
       </div>
-    </div>
   </div>
 </section>
 
