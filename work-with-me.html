@@ -145,8 +145,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0.25rem 0;transition
 .reveal.visible{opacity:1;transform:none}
 
 footer{background:var(--navy);padding:4rem 0 2rem;border-top:1px solid rgba(255,255,255,0.06)}
-.footer-inner{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:3rem;margin-bottom:3rem}
-.footer-logo-img-inner{height:56px;width:auto;display:block;margin-bottom:1rem}
+.footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;margin-bottom:2.5rem}
+.footer-logo{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem}
+.footer-logo-img-inner{height:40px;width:auto;display:block}
+.footer-logo-name{font-family:var(--font-display);font-size:1rem;font-weight:500}
 .footer-bio{font-size:0.82rem;color:rgba(255,255,255,0.4);line-height:1.75;margin-bottom:1.5rem;max-width:280px}
 .footer-social{display:flex;gap:0.6rem}
 .fsoc{width:34px;height:34px;border:1px solid rgba(255,255,255,0.1);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:0.6rem;font-weight:700;color:rgba(255,255,255,0.4);transition:var(--tr)}
@@ -156,8 +158,12 @@ footer{background:var(--navy);padding:4rem 0 2rem;border-top:1px solid rgba(255,
 .footer-links li{margin-bottom:0.6rem}
 .footer-links a{font-size:0.82rem;color:rgba(255,255,255,0.45);transition:var(--tr)}
 .footer-links a:hover{color:var(--teal)}
-.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:1.5rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:0.5rem}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem}
+.footer-copy-group{display:flex;flex-direction:column;gap:0.4rem}
 .footer-copy,.footer-creds{font-size:0.7rem;color:rgba(255,255,255,0.2);letter-spacing:0.04em}
+.footer-legal{display:flex;gap:1.5rem}
+.footer-legal a{font-size:0.65rem;color:rgba(255,255,255,0.2);transition:var(--tr)}
+.footer-legal a:hover{color:var(--teal)}
 
 @media(max-width:900px){
   .offers-grid,.tstrip-inner,.exec-grid{grid-template-columns:1fr}
@@ -516,32 +522,38 @@ body {
   <div class="container">
     <div class="footer-inner">
       <div>
-        <img src="anju-logo.jpg" alt="Anju Redheendran" class="footer-logo-img-inner">
-        <p class="footer-bio">ICU nurse turned healthcare informatics executive turned author and mindset strategist. Helping people build resilience, self-trust, and identity — from the inside out.</p>
+        <div class="footer-logo">
+          <img src="anju-logo.jpg" alt="Anju Redheendran" class="footer-logo-img-inner">
+          <span class="footer-logo-name">Anju Redheendran</span>
+        </div>
+        <p class="footer-bio">Healthcare Informatics Executive · Published Author · Mindset Strategist · Founder, ICU-1111</p>
         <div class="footer-social">
           <a href="https://linkedin.com/in/anjuredheendran" target="_blank" rel="noopener" class="fsoc" aria-label="LinkedIn">in</a>
           <a href="https://tiktok.com/@icu_1111" target="_blank" rel="noopener" class="fsoc" aria-label="TikTok">TK</a>
           <a href="https://instagram.com/icu_1111" target="_blank" rel="noopener" class="fsoc" aria-label="Instagram">IG</a>
           <a href="https://facebook.com/Anju.ICU1111" target="_blank" rel="noopener" class="fsoc" aria-label="Facebook">FB</a>
           <a href="https://youtube.com/@ICU-1111" target="_blank" rel="noopener" class="fsoc" aria-label="YouTube">YT</a>
+          <a href="https://linktr.ee/icu1111" target="_blank" rel="noopener" class="fsoc" aria-label="Linktree">LT</a>
         </div>
       </div>
       <div>
         <p class="footer-col-title">Navigate</p>
-        <ul class="footer-links"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="work-with-me.html">Work With Me</a></li><li><a href="https://icu-1111.com" target="_blank">ICU-1111</a></li></ul>
-      </div>
-      <div>
-        <p class="footer-col-title">Work with me</p>
-        <ul class="footer-links"><li><a href="https://calendly.com/icu1111/30-min-discovery-call" target="_blank" rel="noopener">Book a free call</a></li><li><a href="https://icu-1111.com" target="_blank" rel="noopener">ICU-1111</a></li><li><a href="https://anjana-s-school7.teachable.com/purchase?product_id=5345948" target="_blank" rel="noopener">From Overdrive to Alive</a></li><li><a href="mailto:Anju@icu-1111.com">Anju@icu-1111.com</a></li></ul>
+        <ul class="footer-links"><li><a href="about.html">About Anju</a></li><li><a href="index.html#framework">The Frameworks</a></li><li><a href="work-with-me.html">Work With Me</a></li><li><a href="https://www.amazon.com/dp/B0DF5T4Q23" target="_blank" rel="noopener">Get the Book</a></li><li><a href="https://icu-1111.com" target="_blank" rel="noopener">ICU-1111</a></li></ul>
       </div>
       <div>
         <p class="footer-col-title">Connect</p>
-        <ul class="footer-links"><li><a href="https://linkedin.com/in/anjuredheendran" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="https://tiktok.com/@icu_1111" target="_blank" rel="noopener">TikTok @icu_1111</a></li><li><a href="https://youtube.com/@ICU-1111" target="_blank" rel="noopener">YouTube</a></li><li><a href="https://a.co/d/41wM8AW" target="_blank" rel="noopener">Buy the Book</a></li></ul>
+        <ul class="footer-links"><li><a href="https://calendly.com/icu1111/30-min-discovery-call" target="_blank" rel="noopener">Book a Discovery Call</a></li><li><a href="mailto:Anju@icu-1111.com">Anju@icu-1111.com</a></li><li><a href="https://linkedin.com/in/anjuredheendran" target="_blank" rel="noopener">LinkedIn</a></li><li><a href="https://tiktok.com/@icu_1111" target="_blank" rel="noopener">TikTok @icu_1111</a></li><li><a href="https://linktr.ee/icu1111" target="_blank" rel="noopener">Linktree</a></li></ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p class="footer-copy">© 2025 Anju Redheendran · anjuredheendran.com · All rights reserved</p>
-      <p class="footer-creds">RN, BSN, MBA, CLC · Founder & CEO, ICU-1111 · Oracle Cerner · Epic EHR · Tenet Healthcare</p>
+      <div class="footer-copy-group">
+        <p class="footer-copy">© 2024–2026 Anju Redheendran. All rights reserved. DEAL Framework™ and PAST Framework™ are proprietary intellectual property.</p>
+        <p class="footer-creds">RN, BSN, MBA, CLC · Founder &amp; CEO, ICU-1111 · Oracle Cerner · Epic EHR · Tenet Healthcare</p>
+      </div>
+      <div class="footer-legal">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
     </div>
   </div>
 </footer>

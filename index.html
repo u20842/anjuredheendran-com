@@ -463,8 +463,10 @@ footer{background:#060f1e;padding:3.5rem 0 2rem;border-top:1px solid rgba(255,25
 .footer-links{list-style:none;display:flex;flex-direction:column;gap:0.6rem;}
 .footer-links a{font-size:0.8rem;color:var(--gray);transition:color var(--transition);}
 .footer-links a:hover{color:var(--white);}
-.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.06);padding-top:1.5rem;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem;}
+.footer-copy-group{display:flex;flex-direction:column;gap:0.4rem;}
 .footer-copy{font-size:0.65rem;color:rgba(255,255,255,0.3);}
+.footer-creds{font-size:0.65rem;color:rgba(255,255,255,0.3);letter-spacing:0.02em;}
 .footer-legal{display:flex;gap:1.5rem;}
 .footer-legal a{font-size:0.65rem;color:rgba(255,255,255,0.3);transition:color var(--transition);}
 .footer-legal a:hover{color:var(--white);}
@@ -1141,8 +1143,11 @@ p,
         <p class="footer-tagline">Healthcare Informatics Executive · Published Author · Mindset Strategist · Founder, ICU-1111</p>
         <div class="footer-social">
           <a href="https://www.linkedin.com/in/anjuredheendran" target="_blank" class="social-link" aria-label="LinkedIn">in</a>
-          <a href="https://www.tiktok.com/@icu_1111" target="_blank" class="social-link" aria-label="TikTok">♪</a>
-          <a href="https://linktr.ee/icu1111" target="_blank" class="social-link" aria-label="Linktree">🌲</a>
+          <a href="https://www.tiktok.com/@icu_1111" target="_blank" class="social-link" aria-label="TikTok">TK</a>
+          <a href="https://www.instagram.com/icu_1111" target="_blank" class="social-link" aria-label="Instagram">IG</a>
+          <a href="https://www.facebook.com/Anju.ICU1111" target="_blank" class="social-link" aria-label="Facebook">FB</a>
+          <a href="https://www.youtube.com/@ICU-1111" target="_blank" class="social-link" aria-label="YouTube">YT</a>
+          <a href="https://linktr.ee/icu1111" target="_blank" class="social-link" aria-label="Linktree">LT</a>
         </div>
       </div>
       <div>
@@ -1167,7 +1172,10 @@ p,
       </div>
     </div>
     <div class="footer-bottom">
-      <span class="footer-copy">© 2024–2026 Anju Redheendran. All rights reserved. DEAL Framework™ and PAST Framework™ are proprietary intellectual property.</span>
+      <div class="footer-copy-group">
+        <span class="footer-copy">© 2024–2026 Anju Redheendran. All rights reserved. DEAL Framework™ and PAST Framework™ are proprietary intellectual property.</span>
+        <span class="footer-creds">RN, BSN, MBA, CLC · Founder &amp; CEO, ICU-1111 · Oracle Cerner · Epic EHR · Tenet Healthcare</span>
+      </div>
       <div class="footer-legal">
         <a href="#">Privacy</a>
         <a href="#">Terms</a>
