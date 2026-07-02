@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Concept Glossary · Anju Redheendran</title>
+<meta name="description" content="Definitions for every term, framework, and concept behind Anju Redheendran's work — The PAST Framework, The DEAL Framework, Capacity, Worth, Safety, Trust, and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+:root {
+  --cream: #faf7f2;
+  --warm: #f5f0e8;
+  --parchment: #ede6d8;
+  --navy: #0a1628;
+  --navy-soft: #1a2d4a;
+  --teal: #00c8b4;
+  --teal-soft: rgba(0,200,180,0.1);
+  --gold: #c9a84c;
+  --gold-soft: rgba(201,168,76,0.12);
+  --rust: #c85a3c;
+  --rust-soft: rgba(200,90,60,0.08);
+  --sage: #5a8a6a;
+  --sage-soft: rgba(90,138,106,0.1);
+  --text: #1a1a2e;
+  --text-mid: #4a4a5e;
+  --text-light: #7a7a8e;
+  --border: rgba(26,26,46,0.08);
+  --border-mid: rgba(26,26,46,0.14);
+}
+
+html{scroll-behavior:smooth;}
+body{background:var(--cream);color:var(--text);font-family:'Montserrat',sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden;}
+
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0;}
+
+.wrap{position:relative;z-index:1;max-width:1060px;margin:0 auto;padding:0 2rem;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(250,247,242,0.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:1.1rem 2.5rem;display:flex;justify-content:space-between;align-items:center;}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--navy);text-decoration:none;}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);text-decoration:none;font-weight:500;transition:color 0.3s;}
+.nav-links a:hover{color:var(--teal);}
+.nav-switch{font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-light);text-decoration:none;border:1px solid var(--border-mid);padding:0.4rem 0.9rem;transition:all 0.3s;}
+.nav-switch:hover{color:var(--teal);border-color:var(--teal);}
+
+@media (max-width:760px){.nav-links{display:none;}}
+
+/* HERO */
+.hero{padding:140px 0 60px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:40px;right:-200px;width:700px;height:700px;border-radius:50%;border:1px solid rgba(0,200,180,0.08);pointer-events:none;}
+.hero::after{content:'';position:absolute;top:120px;right:-260px;width:700px;height:700px;border-radius:50%;border:1px solid rgba(201,168,76,0.06);pointer-events:none;}
+.hero-inner{max-width:700px;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:0.8rem;font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--teal);font-weight:500;margin-bottom:2rem;}
+.hero-eyebrow::before{content:'';display:inline-block;width:24px;height:1px;background:var(--teal);}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.3rem,5vw,4rem);font-weight:300;line-height:1.15;color:var(--navy);margin-bottom:1.4rem;}
+.hero h1 em{font-style:italic;color:var(--teal);}
+.hero-sub{font-size:0.95rem;color:var(--text-mid);max-width:540px;line-height:1.95;}
+
+/* SEARCH */
+.search-wrap{position:sticky;top:70px;z-index:50;background:var(--cream);padding:1.2rem 0;border-bottom:1px solid var(--border);margin-bottom:1rem;}
+.search-box{position:relative;max-width:460px;}
+.search-box input{width:100%;padding:0.85rem 1.2rem 0.85rem 2.6rem;border:1px solid var(--border-mid);border-radius:2px;background:white;font-family:'Montserrat',sans-serif;font-size:0.85rem;color:var(--text);outline:none;transition:border-color 0.3s;}
+.search-box input:focus{border-color:var(--teal);}
+.search-box::before{content:'⌕';position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--text-light);font-size:1.1rem;pointer-events:none;}
+.search-count{font-size:0.68rem;letter-spacing:0.05em;color:var(--text-light);margin-top:0.6rem;}
+
+/* SECTION LABEL */
+.sec-label{font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-light);font-weight:500;display:flex;align-items:center;gap:1rem;margin:3.5rem 0 1.8rem;}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border-mid);}
+
+/* TERM GRID */
+.term-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;}
+@media (max-width:760px){.term-grid{grid-template-columns:1fr;}}
+
+.term-card{background:white;padding:1.6rem 1.7rem;border-left:3px solid var(--border-mid);transition:border-color 0.3s,transform 0.3s;}
+.term-card.tag-concept{border-color:var(--gold);}
+.term-card.tag-need{border-color:var(--rust);}
+.term-card.tag-framework{border-color:var(--teal);}
+.term-card.tag-tool{border-color:var(--sage);}
+.term-card:hover{transform:translateX(3px);}
+
+.term-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:500;color:var(--navy);margin-bottom:0.5rem;}
+.term-def{font-size:0.82rem;color:var(--text-mid);line-height:1.85;margin-bottom:0.8rem;}
+.term-meta{font-size:0.62rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-light);}
+
+/* ACRONYM LETTERS */
+.term-letters{margin:0.8rem 0;padding-left:0;list-style:none;}
+.term-letters li{font-size:0.78rem;color:var(--text-mid);line-height:1.7;padding-left:1.4rem;position:relative;margin-bottom:0.3rem;}
+.term-letters li::before{content:'—';position:absolute;left:0;color:var(--teal);}
+.term-letters strong{color:var(--navy);font-weight:600;}
+
+.term-related{margin-top:0.7rem;font-size:0.68rem;color:var(--text-light);}
+.term-related a{color:var(--teal);text-decoration:none;}
+.term-related a:hover{text-decoration:underline;}
+
+.no-results{display:none;text-align:center;padding:3rem 0;color:var(--text-light);font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;}
+
+/* CORE NEEDS NOTE */
+.needs-note{background:var(--rust-soft);border-left:3px solid var(--rust);padding:1rem 1.3rem;margin-bottom:1.8rem;font-size:0.78rem;color:var(--text-mid);line-height:1.8;}
+.needs-note strong{color:var(--rust);}
+
+/* CTA */
+.cta-dark{padding:5rem 0;background:var(--navy);margin:5rem 0 0;text-align:center;}
+.cta-dark h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:300;color:white;margin-bottom:0.8rem;line-height:1.2;}
+.cta-dark h2 em{font-style:italic;color:var(--teal);}
+.cta-dark p{font-size:0.85rem;color:rgba(255,255,255,0.55);max-width:460px;margin:0 auto 2.2rem;line-height:1.9;}
+.cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-p{background:var(--teal);color:var(--navy);padding:0.85rem 1.8rem;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;text-decoration:none;border-radius:2px;transition:opacity 0.3s;}
+.btn-p:hover{opacity:0.85;}
+.btn-outline{border:1px solid rgba(255,255,255,0.3);color:white;padding:0.85rem 1.8rem;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;text-decoration:none;border-radius:2px;transition:border-color 0.3s;}
+.btn-outline:hover{border-color:var(--teal);color:var(--teal);}
+
+footer{padding:2.5rem;display:flex;justify-content:space-between;font-size:0.68rem;color:var(--text-light);border-top:1px solid var(--border);flex-wrap:wrap;gap:1rem;}
+footer a{color:var(--text-light);text-decoration:none;}
+footer a:hover{color:var(--teal);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Anju Redheendran</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="work-with-me.html">Work With Me</a></li>
+    <li><a href="body-map.html">Body Map</a></li>
+    <li><a href="glossary.html">Glossary</a></li>
+  </ul>
+  <a href="https://calendly.com/icu1111/30-min-discovery-call" class="nav-switch">Book a Call</a>
+</nav>
+
+<div class="wrap">
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">The Concept Glossary</div>
+      <h1>Every term, defined.<br><em>Nothing left to guess at.</em></h1>
+      <p class="hero-sub">The language behind the frameworks, the tools, and the work itself — in plain terms, growing as the work grows.</p>
+    </div>
+  </section>
+
+  <div class="search-wrap">
+    <div class="search-box">
+      <input type="text" id="glossarySearch" placeholder="Search a term or concept..." autocomplete="off">
+    </div>
+    <div class="search-count" id="resultCount"></div>
+  </div>
+
+  <!-- STANDALONE CONCEPTS -->
+  <div class="sec-label">Standalone High-Level Concepts</div>
+  <div class="term-grid" id="section-concept">
+    <div class="term-card tag-concept" data-term="worth">
+      <div class="term-name">Worth</div>
+      <div class="term-def">Whether value is inherent, or must be earned through performance or collected through others' approval.</div>
+      <div class="term-meta">Concept · Worth Typology™</div>
+    </div>
+    <div class="term-card tag-concept" data-term="balance">
+      <div class="term-name">Balance</div>
+      <div class="term-def">Not moderation held from a fixed center. Balance is the byproduct of actually going to an extreme, learning what lives there, and returning with information that isn't accessible by staying centered on purpose. Truth is found somewhere in the continuum between the poles — but it's rarely discovered by maintaining only one extreme point of view the whole time.</div>
+      <div class="term-meta">Concept · underlies Pendulum Principle™</div>
+    </div>
+    <div class="term-card tag-concept" data-term="grace">
+      <div class="term-name">Grace</div>
+      <div class="term-def">The space given before worth has to be proven. Offered before it's earned — which is what makes it grace, not a reward.</div>
+      <div class="term-meta">Concept · pairs with Mercy, Dignity</div>
+    </div>
+    <div class="term-card tag-concept" data-term="mercy">
+      <div class="term-name">Mercy</div>
+      <div class="term-def">The capacity to hold truth and worth at the same time. Not excusing what happened — mercy is what makes accountability survivable.</div>
+      <div class="term-meta">Concept · underlies Mercy Lens™</div>
+    </div>
+    <div class="term-card tag-concept" data-term="dignity">
+      <div class="term-name">Dignity</div>
+      <div class="term-def">Worth that doesn't require earning, proving, or being granted. The ability to remain a full person through struggle rather than being reduced to it.</div>
+      <div class="term-meta">Concept · core brand positioning</div>
+    </div>
+  </div>
+
+  <!-- CORE NEEDS -->
+  <div class="sec-label">Core Needs</div>
+  <div class="needs-note"><strong>Note:</strong> in quiz and assessment results, these five terms appear in all-caps (e.g. SAFETY) to signal which core need isn't currently being met. Standard case is used here in the glossary.</div>
+  <div class="term-grid" id="section-need">
+    <div class="term-card tag-need" data-term="safety">
+      <div class="term-name">Safety</div>
+      <div class="term-def">Is this environment, relationship, or moment actually non-threatening — not performed-as-fine, but actually safe.</div>
+      <div class="term-meta">Core Need</div>
+    </div>
+    <div class="term-card tag-need" data-term="trust">
+      <div class="term-name">Trust</div>
+      <div class="term-def">The capacity to rely on reality, on other people, or on yourself — without needing to control the outcome first.</div>
+      <div class="term-meta">Core Need</div>
+    </div>
+    <div class="term-card tag-need" data-term="capacity">
+      <div class="term-name">Capacity</div>
+      <div class="term-def">How much a person can currently hold, feel, and integrate. Maturity is the development and/or expansion of a capacity — not an age, not a behavior.</div>
+      <div class="term-meta">Core Need · Capacity Framework™</div>
+    </div>
+    <div class="term-card tag-need" data-term="identity">
+      <div class="term-name">Identity</div>
+      <div class="term-def">Who's actually present when no one needs anything from you. The thing overfunctioning is usually covering for.</div>
+      <div class="term-meta">Core Need · Identity Restoration Model™</div>
+    </div>
+    <div class="term-card tag-need" data-term="worth core">
+      <div class="term-name">Worth <span style="font-size:0.65rem;color:var(--text-light);font-family:'Montserrat',sans-serif;">(as Core Need)</span></div>
+      <div class="term-def">Whether value is present on its own, or has to be generated or collected to feel real.</div>
+      <div class="term-meta">Core Need · Worth Typology™</div>
+    </div>
+  </div>
+
+  <!-- FRAMEWORKS & MODELS -->
+  <div class="sec-label">Frameworks &amp; Models</div>
+  <div class="term-grid" id="section-framework">
+
+    <div class="term-card tag-framework" data-term="past framework pairing audition squeeze tank">
+      <div class="term-name">The PAST Framework™</div>
+      <div class="term-def">Diagnoses which pattern is running underneath a struggle. You're not living in the past. Your past is living in you.</div>
+      <ul class="term-letters">
+        <li><strong>P</strong> — The Pairing: wounds recognize wounds</li>
+        <li><strong>A</strong> — The Audition: performing for love instead of receiving it</li>
+        <li><strong>S</strong> — The Squeeze: pressure reveals unattended truth</li>
+        <li><strong>T</strong> — The Tank: what you carry is what you pour</li>
+      </ul>
+      <div class="term-meta">Framework</div>
+    </div>
+
+    <div class="term-card tag-framework" data-term="deal framework dont resist reality adjust perspective embrace discomfort level up">
+      <div class="term-name">The DEAL Framework™</div>
+      <div class="term-def">The path back to yourself once PAST names what's running. Problems aren't the problem. How you DEAL with them is.</div>
+      <ul class="term-letters">
+        <li><strong>D</strong> — Don't Resist Reality</li>
+        <li><strong>A</strong> — Adjust Your Perspective</li>
+        <li><strong>E</strong> — Embrace Discomfort</li>
+        <li><strong>L</strong> — Level Up</li>
+      </ul>
+      <div class="term-meta">Framework</div>
+    </div>
+
+    <div class="term-card tag-framework" data-term="safety trust continuum threat survive stabilize thrive">
+      <div class="term-name">The Safety-Trust Continuum™</div>
+      <div class="term-def">Six stages describing where a person actually is, versus where they look like they are from the outside: Threat, Survive, Stabilize, SAFE, Trust, Thrive.</div>
+      <div class="term-meta">Continuum</div>
+    </div>
+
+    <div class="term-card tag-framework" data-term="capacity framework hierarchy">
+      <div class="term-name">The Capacity Framework™</div>
+      <div class="term-def">The hierarchy underneath everything else: Safety → Trust → Capacity → Identity → Behavior → Outcomes. You can't skip a level and expect the next one to hold.</div>
+      <div class="term-meta">Framework</div>
+    </div>
+
+    <div class="term-card tag-framework" data-term="capacity index score trend report">
+      <div class="term-name">Capacity Index™</div>
+      <div class="term-def">The scored, measurable output of the Capacity Framework — turning "how much can you hold right now" into a Score, a Trend, and a Report.</div>
+      <div class="term-meta">Index</div>
+    </div>
+
+    <div class="term-card tag-framework" data-term="body literacy">
+      <div class="term-name">Body Literacy™</div>
+      <div class="term-def">The skill of reading what your body has been trying to say — before it becomes a diagnosis.</div>
+      <div class="term-meta">Methodology</div>
+    </div>
+
+    <div class="term-card tag-framework" data-term="worth typology performance based borrowed structural">
+      <div class="term-name">Worth Typology™</div>
+      <div class="term-def">The three ways worth gets built — performance-based (proof through output), borrowed (proof through others' approval), or structural (worth that exists without proof at all).</div>
+      <div class="term-meta">Typology</div>
+    </div>
+
+    <div class="term-card tag-framework" data-term="shame typology">
+      <div class="term-name">Shame Typology™</div>
+      <div class="term-def">How shame shows up and gets processed — or avoided — depending on which identity pole a person is defending.</div>
+      <div class="term-meta">Typology</div>
+    </div>
+
+    <div class="term-card tag-framework" data-term="pendulum principle balance continuum extremes">
+      <div class="term-name">Pendulum Principle™</div>
+      <div class="term-def">Balance isn't found by staying centered — it's discovered by swinging toward an extreme, learning what lives there, and returning. The continuum between the poles is the realistic zone where thriving happens; the extremes are usually where we learned to survive.</div>
+      <div class="term-meta">Principle · see also: Balance</div>
+    </div>
+
+    <div class="term-card tag-framework" data-term="cylinder of truth perspective">
+      <div class="term-name">Cylinder of Truth™</div>
+      <div class="term-def">What looks like a circle from one angle and a rectangle from another can both be true — the same reality shows different shapes depending on where you're standing.</div>
+      <div class="term-meta">Model</div>
+    </div>
+
+    <div class="term-card tag-framework" data-term="willingness exposure grid">
+      <div class="term-name">Willingness/Exposure Grid™</div>
+      <div class="term-def">Maps the gap between what someone says they want and what they're actually willing to risk to get it — because willingness and desire aren't the same thing.</div>
+      <div class="term-meta">Grid</div>
+    </div>
+
+    <div class="term-card tag-framework" data-term="mercy lens">
+      <div class="term-name">Mercy Lens™</div>
+      <div class="term-def">Looking at a pattern — your own or someone else's — through the question "what did this protect, and what did it cost?" instead of through judgment.</div>
+      <div class="term-meta">Lens · see also: Mercy</div>
+    </div>
+
+    <div class="term-card tag-framework" data-term="identity restoration model">
+      <div class="term-name">Identity Restoration Model™</div>
+      <div class="term-def">The structural process of rebuilding a self that got outsourced to performance or other people's approval — not becoming someone new, but recovering who was already there underneath.</div>
+      <div class="term-meta">Model</div>
+    </div>
+
+    <div class="term-card tag-framework" data-term="integration model umbrella axis">
+      <div class="term-name">The Integration Model™</div>
+      <div class="term-def">The 3-axis map — Identity, Relational Reality, Capacity — that shows where all the other frameworks live in relation to each other. Not a new diagnosis; the container the diagnoses live inside.</div>
+      <div class="term-meta">Model · umbrella architecture</div>
+    </div>
+
+  </div>
+
+  <!-- TOOLS & ASSESSMENTS -->
+  <div class="sec-label">Tools &amp; Assessments</div>
+  <div class="term-grid" id="section-tool">
+    <div class="term-card tag-tool" data-term="body map quiz assessment">
+      <div class="term-name">The Body Map™</div>
+      <div class="term-def">The assessment that shows you what your body has already been trying to tell you — before it becomes a diagnosis.</div>
+      <div class="term-meta">Tool · bodyspeaks.icu-1111.com</div>
+    </div>
+    <div class="term-card tag-tool" data-term="authorship map self erasure other quiz quadrant">
+      <div class="term-name">The Authorship Map™</div>
+      <div class="term-def">Plots where you actually live between Self-Authorship/Self-Erasure and Other-Authorship/Other-Erasure — usually without you realizing it.</div>
+      <div class="term-meta">Tool · in development</div>
+    </div>
+    <div class="term-card tag-tool" data-term="authorship index score">
+      <div class="term-name">The Authorship Index™</div>
+      <div class="term-def">The scored companion to the Authorship Map — same relationship as the Capacity Framework has to the Capacity Index.</div>
+      <div class="term-meta">Index · in development</div>
+    </div>
+  </div>
+
+  <div class="no-results" id="noResults">No terms match that search yet.</div>
+
+</div><!-- /wrap -->
+
+<section class="cta-dark">
+  <div class="wrap">
+    <h2>Want to see where <em>you</em> land?</h2>
+    <p>These aren't just definitions — they're the map. Take an assessment and find out where you actually are.</p>
+    <div class="cta-btns">
+      <a href="body-map.html" class="btn-p">Take the Body Map</a>
+      <a href="work-with-me.html" class="btn-outline">Work With Me</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© Anju Redheendran · ICU-1111 · All rights reserved</span>
+  <span><a href="index.html">anjuredheendran.com</a> · <a href="https://icu-1111.com">icu-1111.com</a></span>
+</footer>
+
+<script>
+const searchInput = document.getElementById('glossarySearch');
+const allCards = document.querySelectorAll('.term-card');
+const allLabels = document.querySelectorAll('.sec-label');
+const resultCount = document.getElementById('resultCount');
+const noResults = document.getElementById('noResults');
+
+function filterTerms() {
+  const q = searchInput.value.trim().toLowerCase();
+  let visibleCount = 0;
+
+  allCards.forEach(card => {
+    const haystack = (card.dataset.term + ' ' + card.textContent).toLowerCase();
+    const match = q === '' || haystack.includes(q);
+    card.style.display = match ? '' : 'none';
+    if (match) visibleCount++;
+  });
+
+  // Hide section labels if all cards in that section are hidden
+  document.querySelectorAll('.term-grid').forEach(grid => {
+    const visibleInGrid = [...grid.querySelectorAll('.term-card')].some(c => c.style.display !== 'none');
+    const label = grid.previousElementSibling && grid.previousElementSibling.classList.contains('needs-note')
+      ? grid.previousElementSibling.previousElementSibling
+      : grid.previousElementSibling;
+    if (label && label.classList.contains('sec-label')) {
+      label.style.display = visibleInGrid ? '' : 'none';
+    }
+    const note = grid.previousElementSibling;
+    if (note && note.classList.contains('needs-note')) {
+      note.style.display = visibleInGrid ? '' : 'none';
+    }
+  });
+
+  resultCount.textContent = q === '' ? '' : (visibleCount + ' term' + (visibleCount === 1 ? '' : 's') + ' found');
+  noResults.style.display = (q !== '' && visibleCount === 0) ? 'block' : 'none';
+}
+
+searchInput.addEventListener('input', filterTerms);
+</script>
+
+</body>
+</html>
