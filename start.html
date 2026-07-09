@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anju Redheendran | Start Here</title>
+<meta name="description" content="Anju Redheendran, RN, BSN, MBA, CLC — healthcare informatics executive, author, and mindset strategist. Founder of ICU-1111.">
+<link rel="canonical" href="https://anjuredheendran.com/start.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Google Analytics (GA4) — same property as anjuredheendran.com -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RR6WWE2DCF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RR6WWE2DCF');
+</script>
+<style>
+  :root{
+    --navy:#0a1628;
+    --navy-deep:#060d18;
+    --teal:#00c8b4;
+    --gold:#c9a84c;
+    --coral:#c85a3c;
+    --ink:#eef0ee;
+    --ink-dim:#93a0ab;
+    --hair:rgba(255,255,255,0.09);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(0,200,180,0.10), transparent 60%),
+      var(--navy-deep);
+    color:var(--ink);
+    font-family:'Montserrat',sans-serif;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:56px 20px 40px;
+  }
+  .wrap{width:100%;max-width:440px;}
+
+  .id{text-align:center;margin-bottom:30px;}
+  .avatar{
+    width:92px;height:92px;border-radius:50%;overflow:hidden;
+    border:1px solid rgba(0,200,180,0.35);
+    box-shadow:0 0 0 6px rgba(0,200,180,0.06);
+    margin:0 auto 18px;
+  }
+  .avatar img{
+    width:100%;height:100%;object-fit:cover;object-position:50% 4%;
+    transform:scale(1.15);
+    transform-origin:50% 8%;
+    display:block;
+  }
+  .id h1{
+    font-family:'Cormorant Garamond',serif;
+    font-weight:600;
+    font-size:2rem;
+    margin:0 0 6px;
+    letter-spacing:0.01em;
+  }
+  .id .creds{
+    font-size:0.66rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--teal);
+    margin-bottom:12px;
+  }
+  .id .line{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.05rem;
+    color:var(--ink-dim);
+    line-height:1.5;
+    max-width:340px;
+    margin:0 auto;
+  }
+
+  /* Signature element — EKG pulse divider, drawn once on load */
+  .pulse{width:100%;height:84px;margin:28px 0;opacity:0.85;}
+  .pulse path{
+    fill:none;
+    stroke:var(--coral);
+    stroke-width:1.6;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-dasharray:650;
+    stroke-dashoffset:650;
+    animation:draw 1.8s ease-out 0.2s forwards;
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+  @media (prefers-reduced-motion:reduce){
+    .pulse path{ animation:none; stroke-dashoffset:0; }
+  }
+
+  .ebf{
+    text-align:center;
+    max-width:330px;
+    margin:0 auto 30px;
+    opacity:0;
+    transform:translateY(6px);
+    animation:reveal 0.9s ease-out 2.05s forwards;
+  }
+  .ebf-line{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.02rem;
+    color:var(--ink-dim);
+    line-height:1.55;
+    margin:0 0 12px;
+  }
+  .ebf-line b{ color:var(--coral); font-weight:600; font-style:normal; }
+  .ebf-close{
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-weight:600;
+    font-size:1.4rem;
+    letter-spacing:0.01em;
+    color:var(--ink);
+    margin:0;
+    opacity:0;
+    animation:reveal 0.8s ease-out 3.05s forwards;
+  }
+  @keyframes reveal{ to{ opacity:1; transform:translateY(0); } }
+  @media (prefers-reduced-motion:reduce){
+    .ebf,.ebf-close{ animation:none; opacity:1; transform:none; }
+  }
+
+  nav{display:flex;flex-direction:column;gap:12px;}
+  .link{
+    display:flex;align-items:center;gap:14px;
+    padding:16px 20px;
+    background:rgba(255,255,255,0.03);
+    border:1px solid var(--hair);
+    border-radius:12px;
+    text-decoration:none;
+    color:var(--ink);
+    transition:border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+  }
+  .link:hover,.link:focus-visible{
+    border-color:rgba(0,200,180,0.45);
+    background:rgba(0,200,180,0.05);
+    outline:none;
+  }
+  .link:active{ transform:scale(0.985); }
+  .link .ico{
+    flex:0 0 auto;width:20px;height:20px;color:var(--teal);
+  }
+  .link .txt{flex:1;min-width:0;}
+  .link .txt .t{font-size:0.92rem;font-weight:600;letter-spacing:0.01em;}
+  .link .txt .s{font-size:0.74rem;color:var(--ink-dim);margin-top:2px;}
+  .link.primary{
+    border-color:rgba(0,200,180,0.55);
+    background:linear-gradient(180deg, rgba(0,200,180,0.10), rgba(0,200,180,0.03));
+  }
+  .link.primary .txt .t{color:var(--teal);}
+
+  .divider{
+    display:flex;align-items:center;gap:12px;
+    margin:26px 0 14px;
+    color:var(--ink-dim);
+    font-size:0.62rem;letter-spacing:0.16em;text-transform:uppercase;
+  }
+  .divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--hair);}
+
+  .socials{display:flex;justify-content:center;gap:20px;margin-top:6px;}
+  .socials a{
+    width:40px;height:40px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid var(--hair);color:var(--ink-dim);
+    text-decoration:none;transition:border-color 0.15s ease,color 0.15s ease;
+  }
+  .socials a:hover,.socials a:focus-visible{ border-color:var(--gold); color:var(--gold); outline:none; }
+  .socials svg{width:17px;height:17px;}
+
+  footer{
+    text-align:center;margin-top:36px;
+    font-size:0.66rem;letter-spacing:0.03em;color:#4a5a68;
+  }
+  footer a{color:#5a6a78;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="id">
+    <div class="avatar"><img src="anju-start.jpg" alt="Anju Redheendran"></div>
+    <h1>Anju Redheendran</h1>
+    <div class="creds">RN &middot; BSN &middot; MBA &middot; CLC &middot; Founder, ICU&#8209;1111</div>
+    <p class="line">Helping overfunctioners remember who they are when they aren't performing who they need to be for everyone else.</p>
+  </div>
+
+  <svg class="pulse" viewBox="0 0 400 112" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,92 L149,92 Q159,74 169,92 L183,92 L187,96 L193,4 L199,106 L205,92 L221,92 Q236,68 251,92 L400,92"/>
+  </svg>
+
+  <div class="ebf">
+    <p class="ebf-line">Some wounds can't be seen. Meet <b>Your Emergency Best Friend</b> &mdash; for the wounds no one else can see.</p>
+    <p class="ebf-close">I see you.</p>
+  </div>
+
+  <nav>
+    <a class="link primary" href="https://bodyspeaks.icu-1111.com" target="_blank" rel="noopener">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v4M12 18v4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M2 12h4M18 12h4M4.9 19.1l2.8-2.8M16.3 7.7l2.8-2.8"/><circle cx="12" cy="12" r="3.4"/></svg>
+      <div class="txt"><div class="t">What Is Your Body Telling You?</div><div class="s">Take the free Body Map assessment</div></div>
+    </a>
+
+    <a class="link" href="https://calendly.com/icu1111/30-min-discovery-call" target="_blank" rel="noopener">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4.5" width="18" height="16" rx="2"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg>
+      <div class="txt"><div class="t">Book a Discovery Call</div><div class="s">30 minutes, free, no pressure</div></div>
+    </a>
+
+    <a class="link" href="https://www.amazon.com/dp/B0DF5T4Q23" target="_blank" rel="noopener">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4.5A1.5 1.5 0 015.5 3H16v18H5.5A1.5 1.5 0 014 19.5v-15z"/><path d="M16 3h2.5A1.5 1.5 0 0120 4.5v15a1.5 1.5 0 01-1.5 1.5H16"/><path d="M8 7.5h4"/></svg>
+      <div class="txt"><div class="t">I'll Have What SHE's Having!</div><div class="s">Get the book on Amazon</div></div>
+    </a>
+
+    <a class="link" href="https://anjuredheendran.com/#framework">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19V5M4 19h16M8 15l3-4 3 3 4-6"/></svg>
+      <div class="txt"><div class="t">The PAST &amp; DEAL Frameworks</div><div class="s">Understand your past. Learn to DEAL with it.</div></div>
+    </a>
+
+    <a class="link" href="https://icu-1111.com" target="_blank" rel="noopener">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.6-7-10.5A7 7 0 0112 4a7 7 0 017 6.5C19 16.4 12 21 12 21z"/><path d="M12 12.5a2 2 0 100-4 2 2 0 000 4z"/></svg>
+      <div class="txt"><div class="t">Visit ICU&#8209;1111</div><div class="s">Intensive care for the soul</div></div>
+    </a>
+
+    <a class="link" href="https://anjuredheendran.com">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 11.5L12 4l8 7.5"/><path d="M6 10v9.5a1 1 0 001 1h3.5v-6h3v6H17a1 1 0 001-1V10"/></svg>
+      <div class="txt"><div class="t">Learn More About Anju</div><div class="s">Full story, credentials &amp; work &mdash; anjuredheendran.com</div></div>
+    </a>
+  </nav>
+
+  <div class="divider">Follow along</div>
+
+  <div class="socials">
+    <a href="https://www.tiktok.com/@icu_1111" target="_blank" rel="noopener" aria-label="TikTok">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.6 5.82a4.28 4.28 0 01-3.14-1.4V15.4a5.6 5.6 0 11-4.83-5.55v2.66a3 3 0 102.16 2.88V2h2.67a4.28 4.28 0 002.4 3.34 4.5 4.5 0 000 .48z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/icu_1111" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="3.6"/><circle cx="17.4" cy="6.6" r="0.9" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/anjuredheendran" target="_blank" rel="noopener" aria-label="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2 2 0 11-.02 4 2 2 0 01.02-4zM3 8.98h4V21H3V8.98zM9.5 8.98H13v1.64h.05c.5-.9 1.7-1.85 3.5-1.85 3.74 0 4.43 2.36 4.43 5.44V21h-4v-5.88c0-1.4-.03-3.2-1.95-3.2-1.96 0-2.26 1.5-2.26 3.1V21h-4V8.98z"/></svg>
+    </a>
+    <a href="https://www.youtube.com/@ICU-1111" target="_blank" rel="noopener" aria-label="YouTube">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5"/><path d="M10.3 9.3l4.6 2.7-4.6 2.7V9.3z" fill="currentColor" stroke="none"/></svg>
+    </a>
+  </div>
+
+  <footer>
+    &copy; 2024&ndash;2026 Anju Redheendran &middot; <a href="https://anjuredheendran.com">anjuredheendran.com</a>
+  </footer>
+
+</div>
+</body>
+</html>
