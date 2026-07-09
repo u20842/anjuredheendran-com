@@ -9,5 +9,7 @@
 /blogs                  /index.html     301
 /blogs/                 /index.html     301
 
+/tiktok                 https://anjuredheendran.com/start.html?utm_source=tiktok&utm_medium=social&utm_campaign=bio_link   301
+
 # Catch-all: any unmatched URL goes to homepage (prevents 404s)
 /*                      /index.html     200
