@@ -11,5 +11,11 @@
 
 /tiktok                 https://anjuredheendran.com/start.html?utm_source=tiktok&utm_medium=social&utm_campaign=bio_link   301
 
+# Amazon affiliate link redirects — fires a GA4 event client-side before
+# redirecting to Amazon, so a plain server-side 301 won't work here (no JS
+# would run). This rewrite keeps the URL as /go/whatever in the browser
+# while serving go/index.html, which looks up the slug and handles it.
+/go/*                   /go/index.html  200
+
 # Catch-all: any unmatched URL goes to homepage (prevents 404s)
 /*                      /index.html     200
